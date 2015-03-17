@@ -1,0 +1,452 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9F36733E1AB7AB1500362DA9 /* ContactAuthorities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F36733D1AB7AB1500362DA9 /* ContactAuthorities.m */; };
+		9F569B031AB66417000DDA34 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F569B021AB66417000DDA34 /* Login.m */; };
+		9F901B7F1AB50D4A0083DABC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901B7E1AB50D4A0083DABC /* main.m */; };
+		9F901B821AB50D4A0083DABC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901B811AB50D4A0083DABC /* AppDelegate.m */; };
+		9F901B851AB50D4A0083DABC /* CrimeFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901B841AB50D4A0083DABC /* CrimeFeed.m */; };
+		9F901B881AB50D4A0083DABC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F901B861AB50D4A0083DABC /* Main.storyboard */; };
+		9F901B8A1AB50D4A0083DABC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F901B891AB50D4A0083DABC /* Images.xcassets */; };
+		9F901B8D1AB50D4A0083DABC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F901B8B1AB50D4A0083DABC /* LaunchScreen.xib */; };
+		9F901B991AB50D4A0083DABC /* Crime_NutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901B981AB50D4A0083DABC /* Crime_NutTests.m */; };
+		9F901BA41AB50F3A0083DABC /* Signup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901BA31AB50F3A0083DABC /* Signup.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9F901B931AB50D4A0083DABC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F901B711AB50D4A0083DABC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F901B781AB50D4A0083DABC;
+			remoteInfo = "Crime Nut";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9F36733C1AB7AB1500362DA9 /* ContactAuthorities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactAuthorities.h; sourceTree = "<group>"; };
+		9F36733D1AB7AB1500362DA9 /* ContactAuthorities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactAuthorities.m; sourceTree = "<group>"; };
+		9F569B011AB66417000DDA34 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
+		9F569B021AB66417000DDA34 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
+		9F901B791AB50D4A0083DABC /* Crime Nut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crime Nut.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F901B7D1AB50D4A0083DABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F901B7E1AB50D4A0083DABC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9F901B801AB50D4A0083DABC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9F901B811AB50D4A0083DABC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9F901B831AB50D4A0083DABC /* CrimeFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrimeFeed.h; sourceTree = "<group>"; };
+		9F901B841AB50D4A0083DABC /* CrimeFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrimeFeed.m; sourceTree = "<group>"; };
+		9F901B871AB50D4A0083DABC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9F901B891AB50D4A0083DABC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9F901B8C1AB50D4A0083DABC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		9F901B921AB50D4A0083DABC /* Crime NutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Crime NutTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F901B971AB50D4A0083DABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F901B981AB50D4A0083DABC /* Crime_NutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Crime_NutTests.m; sourceTree = "<group>"; };
+		9F901BA21AB50F3A0083DABC /* Signup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Signup.h; sourceTree = "<group>"; };
+		9F901BA31AB50F3A0083DABC /* Signup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Signup.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9F901B761AB50D4A0083DABC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F901B8F1AB50D4A0083DABC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9F901B701AB50D4A0083DABC = {
+			isa = PBXGroup;
+			children = (
+				9F901B7B1AB50D4A0083DABC /* Crime Nut */,
+				9F901B951AB50D4A0083DABC /* Crime NutTests */,
+				9F901B7A1AB50D4A0083DABC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9F901B7A1AB50D4A0083DABC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9F901B791AB50D4A0083DABC /* Crime Nut.app */,
+				9F901B921AB50D4A0083DABC /* Crime NutTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9F901B7B1AB50D4A0083DABC /* Crime Nut */ = {
+			isa = PBXGroup;
+			children = (
+				9F901B801AB50D4A0083DABC /* AppDelegate.h */,
+				9F901B811AB50D4A0083DABC /* AppDelegate.m */,
+				9F901BA21AB50F3A0083DABC /* Signup.h */,
+				9F901BA31AB50F3A0083DABC /* Signup.m */,
+				9F901B831AB50D4A0083DABC /* CrimeFeed.h */,
+				9F901B841AB50D4A0083DABC /* CrimeFeed.m */,
+				9F901B861AB50D4A0083DABC /* Main.storyboard */,
+				9F36733C1AB7AB1500362DA9 /* ContactAuthorities.h */,
+				9F36733D1AB7AB1500362DA9 /* ContactAuthorities.m */,
+				9F569B011AB66417000DDA34 /* Login.h */,
+				9F569B021AB66417000DDA34 /* Login.m */,
+				9F901B891AB50D4A0083DABC /* Images.xcassets */,
+				9F901B8B1AB50D4A0083DABC /* LaunchScreen.xib */,
+				9F901B7C1AB50D4A0083DABC /* Supporting Files */,
+			);
+			path = "Crime Nut";
+			sourceTree = "<group>";
+		};
+		9F901B7C1AB50D4A0083DABC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9F901B7D1AB50D4A0083DABC /* Info.plist */,
+				9F901B7E1AB50D4A0083DABC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9F901B951AB50D4A0083DABC /* Crime NutTests */ = {
+			isa = PBXGroup;
+			children = (
+				9F901B981AB50D4A0083DABC /* Crime_NutTests.m */,
+				9F901B961AB50D4A0083DABC /* Supporting Files */,
+			);
+			path = "Crime NutTests";
+			sourceTree = "<group>";
+		};
+		9F901B961AB50D4A0083DABC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9F901B971AB50D4A0083DABC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9F901B781AB50D4A0083DABC /* Crime Nut */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F901B9C1AB50D4A0083DABC /* Build configuration list for PBXNativeTarget "Crime Nut" */;
+			buildPhases = (
+				9F901B751AB50D4A0083DABC /* Sources */,
+				9F901B761AB50D4A0083DABC /* Frameworks */,
+				9F901B771AB50D4A0083DABC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Crime Nut";
+			productName = "Crime Nut";
+			productReference = 9F901B791AB50D4A0083DABC /* Crime Nut.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9F901B911AB50D4A0083DABC /* Crime NutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F901B9F1AB50D4A0083DABC /* Build configuration list for PBXNativeTarget "Crime NutTests" */;
+			buildPhases = (
+				9F901B8E1AB50D4A0083DABC /* Sources */,
+				9F901B8F1AB50D4A0083DABC /* Frameworks */,
+				9F901B901AB50D4A0083DABC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F901B941AB50D4A0083DABC /* PBXTargetDependency */,
+			);
+			name = "Crime NutTests";
+			productName = "Crime NutTests";
+			productReference = 9F901B921AB50D4A0083DABC /* Crime NutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9F901B711AB50D4A0083DABC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = crimenut;
+				TargetAttributes = {
+					9F901B781AB50D4A0083DABC = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = XWQ3X4T33E;
+					};
+					9F901B911AB50D4A0083DABC = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 9F901B781AB50D4A0083DABC;
+					};
+				};
+			};
+			buildConfigurationList = 9F901B741AB50D4A0083DABC /* Build configuration list for PBXProject "Crime Nut" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9F901B701AB50D4A0083DABC;
+			productRefGroup = 9F901B7A1AB50D4A0083DABC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9F901B781AB50D4A0083DABC /* Crime Nut */,
+				9F901B911AB50D4A0083DABC /* Crime NutTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9F901B771AB50D4A0083DABC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F901B881AB50D4A0083DABC /* Main.storyboard in Resources */,
+				9F901B8D1AB50D4A0083DABC /* LaunchScreen.xib in Resources */,
+				9F901B8A1AB50D4A0083DABC /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F901B901AB50D4A0083DABC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9F901B751AB50D4A0083DABC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F569B031AB66417000DDA34 /* Login.m in Sources */,
+				9F901B851AB50D4A0083DABC /* CrimeFeed.m in Sources */,
+				9F36733E1AB7AB1500362DA9 /* ContactAuthorities.m in Sources */,
+				9F901BA41AB50F3A0083DABC /* Signup.m in Sources */,
+				9F901B821AB50D4A0083DABC /* AppDelegate.m in Sources */,
+				9F901B7F1AB50D4A0083DABC /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F901B8E1AB50D4A0083DABC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F901B991AB50D4A0083DABC /* Crime_NutTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9F901B941AB50D4A0083DABC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F901B781AB50D4A0083DABC /* Crime Nut */;
+			targetProxy = 9F901B931AB50D4A0083DABC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9F901B861AB50D4A0083DABC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F901B871AB50D4A0083DABC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9F901B8B1AB50D4A0083DABC /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F901B8C1AB50D4A0083DABC /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9F901B9A1AB50D4A0083DABC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9F901B9B1AB50D4A0083DABC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9F901B9D1AB50D4A0083DABC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Allen White (9Y762VF2F4)";
+				INFOPLIST_FILE = "Crime Nut/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "653e1705-61ab-4a3e-bff1-b63562bb9e8a";
+			};
+			name = Debug;
+		};
+		9F901B9E1AB50D4A0083DABC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Allen White (9Y762VF2F4)";
+				INFOPLIST_FILE = "Crime Nut/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "653e1705-61ab-4a3e-bff1-b63562bb9e8a";
+			};
+			name = Release;
+		};
+		9F901BA01AB50D4A0083DABC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Crime NutTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crime Nut.app/Crime Nut";
+			};
+			name = Debug;
+		};
+		9F901BA11AB50D4A0083DABC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Crime NutTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Crime Nut.app/Crime Nut";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9F901B741AB50D4A0083DABC /* Build configuration list for PBXProject "Crime Nut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F901B9A1AB50D4A0083DABC /* Debug */,
+				9F901B9B1AB50D4A0083DABC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F901B9C1AB50D4A0083DABC /* Build configuration list for PBXNativeTarget "Crime Nut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F901B9D1AB50D4A0083DABC /* Debug */,
+				9F901B9E1AB50D4A0083DABC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F901B9F1AB50D4A0083DABC /* Build configuration list for PBXNativeTarget "Crime NutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F901BA01AB50D4A0083DABC /* Debug */,
+				9F901BA11AB50D4A0083DABC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9F901B711AB50D4A0083DABC /* Project object */;
+}
