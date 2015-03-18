@@ -42,7 +42,6 @@
 - (IBAction)loginTapped:(id)sender{
     NSString *uname = usernameText.text;
     NSString *pword = passwordText.text;
-    NSLog(@"U= %@ .... P= %@", uname, pword);
     
     // URL of the endpoint we're going to contact.
 
@@ -56,17 +55,20 @@
     // Convert the dictionary into JSON data.
     NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
                                                        options:0
-                                                         error:nil];
-    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", strData);
-    
+                                                            error:nil];
+//    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
+//    NSLog(@"1:::%@\n", strData);
+//    NSLog(@"2:::%@", JSONData);
     // Create a POST request with our JSON as a request body.
-    [request setHTTPMethod:@"GET"];
+    [request setHTTPMethod:@"POST"];
     [request setHTTPBody:JSONData];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    
-    __block NSMutableArray *response = [NSMutableArray array];
+    //use this to grab the ol response
+    __block NSMutableArray *apiresponse = [NSMutableArray array];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    __block NSString *tokenfromstorage = [[NSString alloc] init];
     
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:queue
@@ -81,12 +83,46 @@
                                                                            JSONObjectWithData:data
                                                                            options:0
                                                                            error:&error];
-                                       NSLog(@"err:::%@\n",error);
-                                       NSLog(@"response:::%@\n",response);
-                                       // do something with response -----------------------------------------------------------------------------------------------------------------------------------
+                                       NSLog(@"err::: %@\n",error);
+                                       NSLog(@"response::: %@\n",response);
+                                       NSLog(@"RespDict::: %@\n", responseDictionary);
+                                       apiresponse = [responseDictionary objectForKey:@"ERROR"];
+                                       if (apiresponse) {
+                                           NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
+//TODO: alert user somehow of error?
+                                       }else{
+                                           //get and store token
+                                           NSString *token = [responseDictionary objectForKey:@"token"];
+                                           NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                           [defaults setObject:token forKey:@"token"];
+                                           [defaults synchronize];
+                                           tokenfromstorage = [defaults stringForKey:@"token"];
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               if(tokenfromstorage){
+                                                   //send em to the main screen
+                                                   CrimeFeed *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"CrimeFeed"];
+//                                                   [self presentViewController:controller animated:YES completion:nil];
+                                                   
+//                                                   CrimeFeed *controller = [[CrimeFeed alloc] initWithNibName:nil bundle:nil];
+                                                   UINavigationController *navigationController =
+                                                   [[UINavigationController alloc] initWithRootViewController:controller];
+                                                   
+                                                   //now present this navigation controller modally
+                                                   [self presentViewController:navigationController
+                                                                      animated:YES
+                                                                    completion:^{
+                                                                        
+                                                                    }];
+                                               }else{
+                                                   //TODO: handle storing issues
+                                               }
+                                           });
+                                       }
+                                   }else{
+                                       NSLog(@"STATUS: %ld\n",(long)statusCode);
                                    }
                                } else {
-                                   NSLog(@"Error,%@", [connectionError localizedDescription]);
+                                   NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
                                }
                            }];
 

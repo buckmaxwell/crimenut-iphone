@@ -22,35 +22,8 @@
     NSString *token = [defaults stringForKey:@"token"];
     //NSLog(@"token:::::%@", token);
     if(token){
-        __block NSMutableArray *response = [NSMutableArray array];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.reddit.com/r/memes.json"]];
-        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
         
-        [NSURLConnection sendAsynchronousRequest:request        queue:queue
-                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                                   
-                                   NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-                                   NSInteger statusCode = [httpResponse statusCode];
-                                   if (!connectionError) {
-                                       if (statusCode != 500) {
-                                           NSError *error = nil;
-                                           NSDictionary *responseDictionary = [NSJSONSerialization
-                                                                               JSONObjectWithData:data
-                                                                               options:0
-                                                                               error:&error];
-                                           response = [[responseDictionary objectForKey:@"data"] objectForKey:@"children"];
-                                           // do something with response -----------------------------------------------------------------------------------------------------------------------------------
-                                           
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               //put shit inside here to run on another thread
-                                           });
-                                       }
-                                   } else {
-                                       NSLog(@"Error,%@", [connectionError localizedDescription]);
-                                   }
-                               }];
     }
-    
     
 }
 
