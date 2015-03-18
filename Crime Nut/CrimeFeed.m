@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults stringForKey:@"token"];
-    NSLog(@"token:::::%@", token);
+    //NSLog(@"token:::::%@", token);
     if(token){
         __block NSMutableArray *response = [NSMutableArray array];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.reddit.com/r/memes.json"]];

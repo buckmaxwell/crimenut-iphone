@@ -10,6 +10,7 @@
 #import "Signup.h"
 #import "CrimeFeed.h"
 
+
 @interface Login ()
 
 @end
@@ -43,12 +44,33 @@
     NSString *pword = passwordText.text;
     NSLog(@"U= %@ .... P= %@", uname, pword);
     
+    // URL of the endpoint we're going to contact.
+
+    NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/users/login"];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    // Create a simple dictionary with numbers.
+    NSDictionary *dictionary = @{@"username":uname, @"password":pword};
+    
+    // Convert the dictionary into JSON data.
+    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                       options:0
+                                                         error:nil];
+    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", strData);
+    
+    // Create a POST request with our JSON as a request body.
+    [request setHTTPMethod:@"GET"];
+    [request setHTTPBody:JSONData];
+    
+    
     __block NSMutableArray *response = [NSMutableArray array];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.reddit.com/r/memes.json"]];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
-    [NSURLConnection sendAsynchronousRequest:request        queue:queue
-                        completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:queue
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                                
                                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
                                NSInteger statusCode = [httpResponse statusCode];
@@ -59,18 +81,15 @@
                                                                            JSONObjectWithData:data
                                                                            options:0
                                                                            error:&error];
-                                       response = [[responseDictionary objectForKey:@"data"] objectForKey:@"children"];
+                                       NSLog(@"err:::%@\n",error);
+                                       NSLog(@"response:::%@\n",response);
                                        // do something with response -----------------------------------------------------------------------------------------------------------------------------------
-                                       
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           //put shit inside here to run on another thread
-                                       });
                                    }
                                } else {
                                    NSLog(@"Error,%@", [connectionError localizedDescription]);
                                }
                            }];
-    
+
 }
 
 - (IBAction)needToSignupTapped:(id)sender{
