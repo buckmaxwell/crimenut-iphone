@@ -1,0 +1,95 @@
+                description                | code | count 
+-------------------------------------------+------+-------
+ Theft - Misdemeanor                       | 115  | 10984
+ Assault                                   | 254  |  6719
+ Theft - From Motor Vehicle - Petit        | 118  |  6379
+ Criminal Damaging                         | 551  |  6272
+ Fraud                                     | 400  |  4963
+ Menacing                                  | 255  |  4330
+ Theft - From Motor Vehicle - Felony       | 117  |  4179
+ Motor Vehicle Theft                       | 200  |  3813
+ Robbery                                   | 450  |  2333
+ Burglary - Zone 3                         | 103  |  2262
+ Burglary - Zone 2                         | 102  |  2103
+ Vandalism                                 | 554  |  2056
+ Telecommunication Harassment              | 552  |  1974
+ Burglary - Zone 4                         | 104  |  1689
+ Burglary - Zone 1                         | 101  |  1438
+ Trespassing                               | 550  |  1141
+ Felony Theft - Zone 1                     | 107  |  1136
+ Burglary - Zone 5                         | 105  |  1071
+ FCCS Referral - SVB Detectives Only       | 717  |  1015
+ Felony Theft - Zone 2                     | 108  |  1002
+ Felony Theft - Zone 3                     | 109  |   944
+ Theft of License Plate                    | 201  |   857
+ Felony Theft - Zone 4                     | 110  |   745
+ Felony Theft - Zone 5                     | 111  |   673
+ Theft - Prescription Drugs                | 119  |   629
+ Felony Assault                            | 262  |   513
+ Gail Niple                                | 300  |   473
+ Disorderly Conduct                        | 712  |   457
+ Miscellaneous Offense                     | 701  |   445
+ Burglary - Zone 3 - ATTEMPT               | 103a |   332
+ Burglary - Zone 2 - ATTEMPT               | 102a |   310
+ Forgery                                   | 401  |   301
+ Discharged Firearms - Occupied Structure  | 260  |   291
+ Motor Vehicle Theft - ATTEMPT             | 200a |   285
+ Embezzlement                              | 501  |   220
+ Theft - Involving Elderly / Disabled      | 114  |   219
+ Burglary - Zone 1 -  ATTEMPT              | 101a |   218
+ Burglary - Zone 4 - ATTEMPT               | 104a |   206
+ Damage To Property                        | 706  |   198
+ Theft of Negotiable Instrument            | 113  |   193
+ Rape/Sexual Assault Vic 15 Yr and Younger | 301  |   171
+ UUMV                                      | 203  |   136
+ Miscellaneous Incident                    | 700  |   132
+ Molesting Vic 15 Yr and Younger           | 302a |   128
+ Burglary - Zone 5 - ATTEMPT               | 105a |   119
+ Public Indecency                          | 304  |   104
+ Theft - Mail                              | 116  |    81
+ Discharging Firearms                      | 259  |    78
+ Homicide                                  | 250  |    72
+ Molesting                                 | 302  |    70
+ Kidnapping                                | 303  |    58
+ Felony Theft                              | 900  |    54
+ Criminal Child Enticement                 | 350  |    39
+Domestic Violence                          | 150  |    37
+ Passing Bad Checks                        | 402  |    35
+ Lost / Stolen Property                    | 704  |    32
+ Breaking and Entering                     | 122  |    27
+ Bomb Threat / Bombing                     | 258  |    27
+ Voyeurism                                 | 305  |    23
+ Wanted Person - Other Agency              | 719  |    19
+ Extortion                                 | 500  |    11
+ Arson                                     | 650  |    11
+ Stalking                                  | 153  |    10
+ Impounded Suspected Stolen Vehicle        | 204  |     9
+ Traffic Arrest                            | 720  |     9
+ Lost License Plate                        | 707  |     9
+ Breaking and Entering Zone 3              | 124  |     8
+ Weapons Offense                           | 713  |     7
+ DV - Aggravated Assault                   | 151  |     5
+ Tampering With Coin Machine               | 121  |     5
+ Foreign Report                            | 705  |     5
+ Safecracking                              | 120  |     5
+ Breaking and Entering Zone 4              | 123  |     5
+ Theft of Utilities                        | 727  |     3
+ Child Endangering/Neglect                 | 352  |     3
+ Aid and Transport                         | 553  |     3
+ Recovered Firearm                         | 261  |     2
+ Theft - Blank Motor Vehicle Title         | 202  |     2
+ Interference With Custody                 | 351  |     2
+ Accidental Overdose                       | 702  |     2
+ Prowling                                  | 709  |     2
+ Violation Protection Order                | 155  |     1
+ Accidental Shooting                       | 257  |     1
+ Lost Weapon/Dangerous Ordnance            | 726  |     1
+ Embezzlement - ATTEMPT                    | 501a |     1
+ Miscellaneous Offense - CIRT Team         | 716  |     1
+ Lost Motor Vehicle                        | 708  |     1
+ Breaking and Entering Zone 5              | 126  |     1
+ CODIS (DNA)                               | 725  |     1
+ Domestic Violence - Victim 17 or Under    | 149  |     1
+ Sealed Record                             | 714  |     1
+ Suicide - ATTEMPT                         | 251A |     1
+ CopLogic                                  | 2000 |     1
