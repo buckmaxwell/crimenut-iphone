@@ -26,7 +26,7 @@
  Felony Theft - Zone 5                     | 111  |   673
  Theft - Prescription Drugs                | 119  |   629
  Felony Assault                            | 262  |   513
- Gail Niple                                | 300  |   473
+ Rape/Sexual Assault Vic 16 Yr and Older   | 300  |   473
  Disorderly Conduct                        | 712  |   457
  Miscellaneous Offense                     | 701  |   445
  Burglary - Zone 3 - ATTEMPT               | 103a |   332
@@ -53,7 +53,7 @@
  Kidnapping                                | 303  |    58
  Felony Theft                              | 900  |    54
  Criminal Child Enticement                 | 350  |    39
-Domestic Violence                          | 150  |    37
+ Domestic Violence                         | 150  |    37
  Passing Bad Checks                        | 402  |    35
  Lost / Stolen Property                    | 704  |    32
  Breaking and Entering                     | 122  |    27
