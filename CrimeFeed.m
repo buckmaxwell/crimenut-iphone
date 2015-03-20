@@ -76,7 +76,7 @@ CLLocationManager *locationManager;
         
         [self.tableView setDataSource:self];
         [self.tableView setDelegate:self];
-        self.tableView.rowHeight = 80;
+        self.tableView.rowHeight = 100;
         //        self.tableView.rowHeight = UITableViewAutomaticDimension;
        // self.tableView.estimatedRowHeight = 160.0;
         
@@ -160,7 +160,7 @@ CLLocationManager *locationManager;
                                        }else{
                                            NSIndexPath *myIndex = [NSIndexPath indexPathForRow:0 inSection:0] ;
                                            self.reportPosts = [responseDictionary objectForKey:@"reports"];
-//                                               NSLog(@"self.reportPosts=%@\n", self.reportPosts);
+                                                                                                                                                                NSLog(@"self.reportPosts=%@\n", self.reportPosts);
                                            //6// update the tableview
                                            NSLog(@"//6// update the tableview\n");
                                            [self.tableView cellForRowAtIndexPath:myIndex];
@@ -204,7 +204,7 @@ CLLocationManager *locationManager;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //NSLog(@"height: %f\n", UITableViewAutomaticDimension);
-    return 80;
+    return 100;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -216,6 +216,24 @@ CLLocationManager *locationManager;
 
         NSString *title = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"title"];
         NSString *subject = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
+        NSString *time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_began"];
+        
+        NSString *housNum = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"house_number"]];
+        NSString *streetPrefix = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street_prefix"]];
+        NSString *street = [NSString stringWithFormat:@"%@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street"]];
+        NSString *streetSuffix = [NSString stringWithFormat:@" %@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street_suffix"]];
+        if([housNum isEqualToString:@"None "]){ housNum = @"";}
+        if([streetPrefix isEqualToString:@"None "]){ streetPrefix = @"";}
+        if([street isEqualToString:@"None"]){ street = @"";}
+        if([streetSuffix isEqualToString:@" None"]){ streetSuffix = @"";}
+        
+        if([time isEqualToString:@"None"]){ time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_reported"];}
+        if([time isEqualToString:@"None"]){ time = @"";}
+        
+        NSString *location = [NSString stringWithFormat:@"%@%@%@%@",housNum,streetPrefix,street,streetSuffix];
+
+        cell.locationLabel.text = location;
+        cell.timeLabel.text = time;
         cell.titleLabel.text = title;
         cell.subtitleLabel.text = subject;
     });
