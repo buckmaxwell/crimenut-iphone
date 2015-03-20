@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ContactAuthorities : UIViewController
+- (IBAction)crimeIsCurrentlyHappeningTapped:(id)sender;
+- (IBAction)crimeIsNotCurrentlyHappeningTapped:(id)sender;
 
 @end

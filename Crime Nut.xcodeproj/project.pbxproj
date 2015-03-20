@@ -9,9 +9,14 @@
 /* Begin PBXBuildFile section */
 		9F36733E1AB7AB1500362DA9 /* ContactAuthorities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F36733D1AB7AB1500362DA9 /* ContactAuthorities.m */; };
 		9F569B031AB66417000DDA34 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F569B021AB66417000DDA34 /* Login.m */; };
+		9F814E5C1ABAFC6B0050C511 /* CallAuthorities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F814E5B1ABAFC6B0050C511 /* CallAuthorities.m */; };
+		9F814E5F1ABB05B80050C511 /* MakeReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F814E5E1ABB05B80050C511 /* MakeReport.m */; };
+		9F814E611ABB79860050C511 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F814E601ABB79860050C511 /* CoreLocation.framework */; };
+		9F814E641ABBDDAE0050C511 /* CrimeFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F814E631ABBDDAE0050C511 /* CrimeFeed.m */; };
+		9F814E671ABBE52C0050C511 /* FeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F814E661ABBE52C0050C511 /* FeedCell.m */; };
+		9F814E6D1ABBEEB10050C511 /* ViewReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F814E6C1ABBEEB10050C511 /* ViewReport.m */; };
 		9F901B7F1AB50D4A0083DABC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901B7E1AB50D4A0083DABC /* main.m */; };
 		9F901B821AB50D4A0083DABC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901B811AB50D4A0083DABC /* AppDelegate.m */; };
-		9F901B851AB50D4A0083DABC /* CrimeFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901B841AB50D4A0083DABC /* CrimeFeed.m */; };
 		9F901B881AB50D4A0083DABC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F901B861AB50D4A0083DABC /* Main.storyboard */; };
 		9F901B8A1AB50D4A0083DABC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F901B891AB50D4A0083DABC /* Images.xcassets */; };
 		9F901B8D1AB50D4A0083DABC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F901B8B1AB50D4A0083DABC /* LaunchScreen.xib */; };
@@ -34,13 +39,22 @@
 		9F36733D1AB7AB1500362DA9 /* ContactAuthorities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactAuthorities.m; sourceTree = "<group>"; };
 		9F569B011AB66417000DDA34 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		9F569B021AB66417000DDA34 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
+		9F814E5A1ABAFC6A0050C511 /* CallAuthorities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallAuthorities.h; sourceTree = "<group>"; };
+		9F814E5B1ABAFC6B0050C511 /* CallAuthorities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallAuthorities.m; sourceTree = "<group>"; };
+		9F814E5D1ABB05B70050C511 /* MakeReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeReport.h; sourceTree = "<group>"; };
+		9F814E5E1ABB05B80050C511 /* MakeReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeReport.m; sourceTree = "<group>"; };
+		9F814E601ABB79860050C511 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		9F814E621ABBDDAE0050C511 /* CrimeFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrimeFeed.h; path = ../CrimeFeed.h; sourceTree = "<group>"; };
+		9F814E631ABBDDAE0050C511 /* CrimeFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrimeFeed.m; path = ../CrimeFeed.m; sourceTree = "<group>"; };
+		9F814E651ABBE52C0050C511 /* FeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCell.h; sourceTree = "<group>"; };
+		9F814E661ABBE52C0050C511 /* FeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedCell.m; sourceTree = "<group>"; };
+		9F814E6B1ABBEEB10050C511 /* ViewReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewReport.h; sourceTree = "<group>"; };
+		9F814E6C1ABBEEB10050C511 /* ViewReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewReport.m; sourceTree = "<group>"; };
 		9F901B791AB50D4A0083DABC /* Crime Nut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crime Nut.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F901B7D1AB50D4A0083DABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F901B7E1AB50D4A0083DABC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9F901B801AB50D4A0083DABC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9F901B811AB50D4A0083DABC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9F901B831AB50D4A0083DABC /* CrimeFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CrimeFeed.h; sourceTree = "<group>"; };
-		9F901B841AB50D4A0083DABC /* CrimeFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrimeFeed.m; sourceTree = "<group>"; };
 		9F901B871AB50D4A0083DABC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F901B891AB50D4A0083DABC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9F901B8C1AB50D4A0083DABC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -56,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F814E611ABB79860050C511 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +87,7 @@
 		9F901B701AB50D4A0083DABC = {
 			isa = PBXGroup;
 			children = (
+				9F814E601ABB79860050C511 /* CoreLocation.framework */,
 				9F901B7B1AB50D4A0083DABC /* Crime Nut */,
 				9F901B951AB50D4A0083DABC /* Crime NutTests */,
 				9F901B7A1AB50D4A0083DABC /* Products */,
@@ -92,13 +108,21 @@
 			children = (
 				9F901B801AB50D4A0083DABC /* AppDelegate.h */,
 				9F901B811AB50D4A0083DABC /* AppDelegate.m */,
-				9F901BA21AB50F3A0083DABC /* Signup.h */,
-				9F901BA31AB50F3A0083DABC /* Signup.m */,
-				9F901B831AB50D4A0083DABC /* CrimeFeed.h */,
-				9F901B841AB50D4A0083DABC /* CrimeFeed.m */,
 				9F901B861AB50D4A0083DABC /* Main.storyboard */,
+				9F814E6B1ABBEEB10050C511 /* ViewReport.h */,
+				9F814E6C1ABBEEB10050C511 /* ViewReport.m */,
+				9F814E651ABBE52C0050C511 /* FeedCell.h */,
+				9F814E661ABBE52C0050C511 /* FeedCell.m */,
+				9F814E621ABBDDAE0050C511 /* CrimeFeed.h */,
+				9F814E631ABBDDAE0050C511 /* CrimeFeed.m */,
 				9F36733C1AB7AB1500362DA9 /* ContactAuthorities.h */,
 				9F36733D1AB7AB1500362DA9 /* ContactAuthorities.m */,
+				9F814E5A1ABAFC6A0050C511 /* CallAuthorities.h */,
+				9F814E5B1ABAFC6B0050C511 /* CallAuthorities.m */,
+				9F814E5D1ABB05B70050C511 /* MakeReport.h */,
+				9F814E5E1ABB05B80050C511 /* MakeReport.m */,
+				9F901BA21AB50F3A0083DABC /* Signup.h */,
+				9F901BA31AB50F3A0083DABC /* Signup.m */,
 				9F569B011AB66417000DDA34 /* Login.h */,
 				9F569B021AB66417000DDA34 /* Login.m */,
 				9F901B891AB50D4A0083DABC /* Images.xcassets */,
@@ -235,8 +259,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F814E671ABBE52C0050C511 /* FeedCell.m in Sources */,
 				9F569B031AB66417000DDA34 /* Login.m in Sources */,
-				9F901B851AB50D4A0083DABC /* CrimeFeed.m in Sources */,
+				9F814E6D1ABBEEB10050C511 /* ViewReport.m in Sources */,
+				9F814E5F1ABB05B80050C511 /* MakeReport.m in Sources */,
+				9F814E641ABBDDAE0050C511 /* CrimeFeed.m in Sources */,
+				9F814E5C1ABAFC6B0050C511 /* CallAuthorities.m in Sources */,
 				9F36733E1AB7AB1500362DA9 /* ContactAuthorities.m in Sources */,
 				9F901BA41AB50F3A0083DABC /* Signup.m in Sources */,
 				9F901B821AB50D4A0083DABC /* AppDelegate.m in Sources */,

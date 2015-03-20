@@ -1,20 +1,19 @@
 //
-//  ContactAuthorities.m
+//  CallAuthorities.m
 //  Crime Nut
 //
-//  Created by Allen White on 3/16/15.
+//  Created by Allen White on 3/19/15.
 //  Copyright (c) 2015 crimenut. All rights reserved.
 //
 
-#import "ContactAuthorities.h"
 #import "CallAuthorities.h"
 #import "MakeReport.h"
 
-@interface ContactAuthorities ()
+@interface CallAuthorities ()
 
 @end
 
-@implementation ContactAuthorities
+@implementation CallAuthorities
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,12 +35,15 @@
 }
 */
 
-- (IBAction)crimeIsCurrentlyHappeningTapped:(id)sender {
-    CallAuthorities *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"CallAuthorities"];
-    [self presentViewController:controller animated:YES completion:nil];
+- (IBAction)CallCbusPoliceTapped:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://6142180104"]];
 }
 
-- (IBAction)crimeIsNotCurrentlyHappeningTapped:(id)sender {
+- (IBAction)CallOSUPoliceTapped:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://6147471405"]];
+}
+
+- (IBAction)NahWeCoolTapped:(id)sender {
     MakeReport *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"MakeReport"];
     [self presentViewController:controller animated:YES completion:nil];
 }
