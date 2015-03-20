@@ -36,13 +36,4 @@
 }
 */
 
-- (IBAction)crimeIsCurrentlyHappeningTapped:(id)sender {
-    CallAuthorities *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"CallAuthorities"];
-    [self presentViewController:controller animated:YES completion:nil];
-}
-
-- (IBAction)crimeIsNotCurrentlyHappeningTapped:(id)sender {
-    MakeReport *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"MakeReport"];
-    [self presentViewController:controller animated:YES completion:nil];
-}
 @end

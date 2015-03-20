@@ -52,13 +52,11 @@ CLLocationManager *locationManager;
 }
 
 // Delegate method
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocation* loc = [locations lastObject]; // locations is guaranteed to have at least one object
-    float latitude = loc.coordinate.latitude;
-    float longitude = loc.coordinate.longitude;
-    NSLog(@"lats:%.8f\n",latitude);
-    NSLog(@"lons:%.8f\n",longitude);
-}
+//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+//    CLLocation* loc = [locations lastObject]; // locations is guaranteed to have at least one object
+//    float latitude = loc.coordinate.latitude;
+//    float longitude = loc.coordinate.longitude;
+//}
 
 // The number of columns of data
 - (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView

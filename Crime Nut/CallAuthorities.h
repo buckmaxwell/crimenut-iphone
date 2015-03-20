@@ -11,6 +11,5 @@
 @interface CallAuthorities : UIViewController
 - (IBAction)CallCbusPoliceTapped:(id)sender;
 - (IBAction)CallOSUPoliceTapped:(id)sender;
-- (IBAction)NahWeCoolTapped:(id)sender;
 
 @end

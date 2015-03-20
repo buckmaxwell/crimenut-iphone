@@ -12,6 +12,8 @@
 
 @interface CrimeFeed ()<CLLocationManagerDelegate>
 
+@property (nonatomic, strong) NSArray *reportPosts;
+
 @end
 
 @implementation CrimeFeed
@@ -24,8 +26,7 @@ CLLocationManager *locationManager;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults stringForKey:@"token"];
     //NSLog(@"token:::::%@", token);
-    self.tableView.estimatedRowHeight = 160.0;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
     if(token){
         
     }else{
@@ -38,22 +39,25 @@ CLLocationManager *locationManager;
     // Dispose of any resources that can be recreated.
 }
 
-// Delegate method
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocation* loc = [locations lastObject]; // locations is guaranteed to have at least one object
-    float latitude = loc.coordinate.latitude;
-    float longitude = loc.coordinate.longitude;
-    NSLog(@"lats:%.8f\n",latitude);
-    NSLog(@"lons:%.8f\n",longitude);
-}
 
+//// Delegate method
+//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+//    CLLocation* loc = [locations lastObject]; // locations is guaranteed to have at least one object
+//    float latitude = loc.coordinate.latitude;
+//    float longitude = loc.coordinate.longitude;
+//}
+
+//3// location services were approved
 -(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    
+    NSLog(@"//3// location services were approved\n");
     if (status == kCLAuthorizationStatusDenied) {
         //location denied, handle accordingly
     }
     else if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        NSLog(@"//4// get feed//\n");
         [self getFeed];
+        //4// get feed//
+
     }
     
 }
@@ -62,29 +66,40 @@ CLLocationManager *locationManager;
     //check if user is logged in
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults stringForKey:@"token"];
+    NSLog(@"//1//send they ass back to login bruh\n");
     if(!token){
-        //send they ass back to login bruh
+        //1//send they ass back to login bruh
         Login *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
         [self presentViewController:controller animated:YES completion:nil];
     }else{
+        
+        [self.tableView setDataSource:self];
+        [self.tableView setDelegate:self];
+        self.tableView.rowHeight = 80;
+        //        self.tableView.rowHeight = UITableViewAutomaticDimension;
+       // self.tableView.estimatedRowHeight = 160.0;
         
         if ([CLLocationManager locationServicesEnabled]) {
             locationManager = [[CLLocationManager alloc] init];
             locationManager.delegate = self;
             if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
                 [locationManager requestWhenInUseAuthorization];
+                //2//get the location to turn on
+                NSLog(@"//2//get the location to turn on\n");
             }
             locationManager.distanceFilter = kCLDistanceFilterNone;
             locationManager.desiredAccuracy = kCLLocationAccuracyBest;
             [locationManager startUpdatingLocation];
+                            NSLog(@"//2.5//get the location to turn on\n");
         }
     }
 }
 
 
-
+//5// get the posts
 -(void)getFeed{
-    // Do any additional setup after loading the view.
+    
+    NSLog(@"//5// get the posts\n");
     
     //get token
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -134,36 +149,24 @@ CLLocationManager *locationManager;
                                                                            JSONObjectWithData:data
                                                                            options:0
                                                                            error:&error];
-                                       NSLog(@"err::: %@\n",error);
-                                       NSLog(@"response::: %@\n",response);
-                                       NSLog(@"RespDict::: %@\n", responseDictionary);
+                                       //NSLog(@"err::: %@\n",error);
+                                       //NSLog(@"response::: %@\n",response);
+                                       //NSLog(@"RespDict::: %@\n", responseDictionary);
                                        apiresponse = [responseDictionary objectForKey:@"ERROR"];
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            //TODO: alert user somehow of error?
                                        }else{
-                                           //get and store token
-                                           //////// NSString *token = [responseDictionary objectForKey:@"token"];
-                                           //                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                           //                                                       if(){
-                                           //                                                           //send em to the main screen
-                                           //                                                           CrimeFeed *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"CrimeFeed"];
-                                           //                                                           //                                                   [self presentViewController:controller animated:YES completion:nil];
-                                           //
-                                           //                                                           //                                                   CrimeFeed *controller = [[CrimeFeed alloc] initWithNibName:nil bundle:nil];
-                                           //                                                           UINavigationController *navigationController =
-                                           //                                                           [[UINavigationController alloc] initWithRootViewController:controller];
-                                           //
-                                           //                                                           //now present this navigation controller modally
-                                           //                                                           [self presentViewController:navigationController
-                                           //                                                                              animated:YES
-                                           //                                                                            completion:^{
-                                           //
-                                           //                                                                            }];
-                                           //                                                       }else{
-                                           //                                                           //TODO: handle storing issues
-                                           //                                                       }
-                                           //                                                   });
+                                           NSIndexPath *myIndex = [NSIndexPath indexPathForRow:0 inSection:0] ;
+                                           self.reportPosts = [responseDictionary objectForKey:@"reports"];
+//                                               NSLog(@"self.reportPosts=%@\n", self.reportPosts);
+                                           //6// update the tableview
+                                           NSLog(@"//6// update the tableview\n");
+                                           [self.tableView cellForRowAtIndexPath:myIndex];
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                NSLog(@"//7// reload data\n");
+                                                [self.tableView reloadData];
+                                           });
                                        }
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
@@ -183,78 +186,39 @@ CLLocationManager *locationManager;
 
 #pragma mark - Table view data source
 
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 80;
+//}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 20;
+    return self.reportPosts.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //NSLog(@"height: %f\n", UITableViewAutomaticDimension);
+    return 80;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
     FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell" forIndexPath:indexPath];
-
     // Configure the cell...
-    [self setTitleForCell:cell atIndex:indexPath];
-    [self setSubtitleForCell:cell atIndex:indexPath];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Update the UI
+
+        NSString *title = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"title"];
+        NSString *subject = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
+        cell.titleLabel.text = title;
+        cell.subtitleLabel.text = subject;
+    });
     return cell;
 }
 
--(void)setSubtitleForCell:(FeedCell *)cell atIndex:(NSIndexPath *)indexPath {
-    //grab the crime info from the index path
-    cell.titleLabel.text = @"Yooo";
-    
-}
-
--(void)setTitleForCell:(FeedCell *)cell atIndex:(NSIndexPath *)indexPath {
-    cell.subtitleLabel.text = @"what up";
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

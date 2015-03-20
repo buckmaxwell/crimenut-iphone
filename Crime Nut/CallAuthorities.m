@@ -43,8 +43,4 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://6147471405"]];
 }
 
-- (IBAction)NahWeCoolTapped:(id)sender {
-    MakeReport *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"MakeReport"];
-    [self presentViewController:controller animated:YES completion:nil];
-}
 @end
