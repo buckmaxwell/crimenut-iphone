@@ -15,12 +15,6 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="isu-5i-Hsq">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="isu-5i-Hsq" id="U8t-Jj-phQ">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" restorationIdentifier="FeedCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="82" id="yDE-dM-lEe" customClass="FeedCell">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -32,18 +26,12 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="20" y="46" width="280" height="17"/>
-                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NbB-zr-LiP">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="20" y="17" width="280" height="21"/>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -104,7 +92,7 @@
                     <navigationItem key="navigationItem" id="ppp-sg-yMw">
                         <barButtonItem key="rightBarButtonItem" title="Make Report" id="xtH-kA-TUH">
                             <connections>
-                                <segue destination="RDs-Py-CBT" kind="show" id="gkr-DF-UCm"/>
+                                <segue destination="RDs-Py-CBT" kind="show" id="QWK-AY-McE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -162,7 +150,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="Pwh-d8-9ll" kind="show" id="oGy-b8-N5D"/>
+                                    <segue destination="Pwh-d8-9ll" kind="show" id="FtZ-ic-1HO"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Is this crime currently happening?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5i2-zT-rOw">
@@ -205,7 +193,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="S7z-Ne-MRQ" kind="show" id="jse-93-Vap"/>
+                                    <segue destination="S7z-Ne-MRQ" kind="show" id="jie-Ov-PHz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -262,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qbS-5E-wEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3663" y="37"/>
+            <point key="canvasLocation" x="3678" y="39"/>
         </scene>
         <!--Report an Incident-->
         <scene sceneID="fkM-N8-hbt">
@@ -552,7 +540,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MGT-Bg-Hed" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3859.5" y="798"/>
+            <point key="canvasLocation" x="4054.5" y="705"/>
         </scene>
         <!--Call Authorities-->
         <scene sceneID="3ys-RV-lVc">
@@ -598,7 +586,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="S7z-Ne-MRQ" kind="show" id="jvj-54-1KF"/>
+                                    <segue destination="S7z-Ne-MRQ" kind="show" id="wF1-0w-hpT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7s-R0-GVc">
@@ -646,6 +634,7 @@
                                 <exclude reference="a7s-R0-GVc"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Bjk-NJ-3K6"/>
                                 <exclude reference="RF7-Mh-baD"/>
                                 <exclude reference="T61-pO-X0l"/>
                                 <exclude reference="4Jc-B7-ogV"/>
@@ -655,7 +644,6 @@
                                 <exclude reference="dES-4R-vlf"/>
                                 <exclude reference="HsJ-6f-Pef"/>
                                 <exclude reference="nzE-Ge-XLH"/>
-                                <exclude reference="Bjk-NJ-3K6"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -665,6 +653,7 @@
                                 <include reference="a7s-R0-GVc"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Bjk-NJ-3K6"/>
                                 <include reference="RF7-Mh-baD"/>
                                 <include reference="T61-pO-X0l"/>
                                 <include reference="4Jc-B7-ogV"/>
@@ -674,14 +663,14 @@
                                 <include reference="dES-4R-vlf"/>
                                 <include reference="HsJ-6f-Pef"/>
                                 <include reference="nzE-Ge-XLH"/>
-                                <include reference="Bjk-NJ-3K6"/>
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="u7B-7x-C8R"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Yu-Ws-QDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4329" y="39"/>
+            <point key="canvasLocation" x="4440" y="37"/>
         </scene>
         <!--Signup-->
         <scene sceneID="dzD-FJ-NcL">
@@ -1055,6 +1044,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jvj-54-1KF"/>
+        <segue reference="jie-Ov-PHz"/>
     </inferredMetricsTieBreakers>
 </document>

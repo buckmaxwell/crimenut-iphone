@@ -59,15 +59,15 @@ CLLocationManager *locationManager;
 //}
 
 // The number of columns of data
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return (int)1;
+    return 1;
 }
 
 // The number of rows of data
-- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return (int)pickerData.count;
+    return pickerData.count;
 }
 
 // The data to return for the row and component (column) that's being passed in
@@ -79,7 +79,7 @@ CLLocationManager *locationManager;
 - (IBAction)postButtonTapped:(id)sender {
     NSString *title =titleTextField.text;
     NSString *where = whereTextField.text;
-    NSString *when = whenTextField.text;
+    //NSString *when = whenTextField.text;
     NSString *what = [subjectCodes objectAtIndex:[subjectPicker selectedRowInComponent:0]];
     NSString *desc = descriptionTextField.text;
     
@@ -180,4 +180,10 @@ CLLocationManager *locationManager;
                            }];
 
 }
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [locationManager stopUpdatingLocation];
+}
+
 @end

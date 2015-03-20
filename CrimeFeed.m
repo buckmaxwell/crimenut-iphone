@@ -26,7 +26,7 @@ CLLocationManager *locationManager;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults stringForKey:@"token"];
     //NSLog(@"token:::::%@", token);
-    
+
     if(token){
         
     }else{
@@ -63,6 +63,7 @@ CLLocationManager *locationManager;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     //check if user is logged in
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults stringForKey:@"token"];
@@ -180,7 +181,8 @@ CLLocationManager *locationManager;
 
 
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [locationManager stopUpdatingLocation];
 }
 
