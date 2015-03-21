@@ -142,7 +142,6 @@ CLLocationManager *locationManager;
                                        }else{
                                            NSIndexPath *myIndex = [NSIndexPath indexPathForRow:0 inSection:0] ;
                                            self.reportPosts = [responseDictionary objectForKey:@"reports"];
-//                                                                                                                                                                NSLog(@"self.reportPosts=%@\n", self.reportPosts);
                                            //6// update the tableview
                                            NSLog(@"//6// update the tableview\n");
                                            [self.tableView cellForRowAtIndexPath:myIndex];
@@ -153,9 +152,15 @@ CLLocationManager *locationManager;
                                        }
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                       });
                                    }
                                } else {
                                    NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                   });
                                }
                            }];
     
@@ -166,6 +171,15 @@ CLLocationManager *locationManager;
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [locationManager stopUpdatingLocation];
+}
+
+-(void)showAlert:(NSString *)title withMessage:(NSString *)message{
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:title
+                                                       message:message
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+    [theAlert show];
 }
 
 #pragma mark - Table view data source

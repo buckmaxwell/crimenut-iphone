@@ -44,12 +44,7 @@
     NSString *pword = passwordTextField.text;
     //NSLog(@"U= %@ .... P= %@", uname, pword);
     if( [uname isEqualToString:@""] || [pword isEqualToString:@""] ){
-        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Something went wrong"
-                                                           message:@"Username and password are required"
-                                                          delegate:self
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil];
-        [theAlert show];
+        [self showAlert:@"Something went wrong" withMessage:@"Username and password are required"];
         return;
     }
     // URL of the endpoint we're going to contact.
@@ -98,7 +93,11 @@
                                        apiresponse = [responseDictionary objectForKey:@"ERROR"];
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
-                                           //TODO: alert user somehow of error?
+                                           //alert user somehow of error?
+                                           
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self showAlert:@"We encountered a problem" withMessage:apiresponse];
+                                           });
                                        }else{
                                            //get and store token
                                            NSString *token = [responseDictionary objectForKey:@"token"];
@@ -110,12 +109,7 @@
                                                if(tokenfromstorage){
                                                    //send em to the main screen
                                                    CrimeFeed *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"CrimeFeed"];
-                                                   //                                                   [self presentViewController:controller animated:YES completion:nil];
-                                                   
-                                                   //                                                   CrimeFeed *controller = [[CrimeFeed alloc] initWithNibName:nil bundle:nil];
-                                                   UINavigationController *navigationController =
-                                                   [[UINavigationController alloc] initWithRootViewController:controller];
-                                                   
+                                                   UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
                                                    //now present this navigation controller modally
                                                    [self presentViewController:navigationController
                                                                       animated:YES
@@ -123,18 +117,36 @@
                                                                         
                                                                     }];
                                                }else{
-                                                   //TODO: handle storing issues
+                                                   //alert user somehow of storage error?
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       [self showAlert:@"We encountered a problem" withMessage:@"For some reason we could not save your information on this phone"];
+                                                   });
                                                }
                                            });
                                        }
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                       });
                                    }
                                } else {
                                    NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                   });
                                }
                            }];
 
+}
+
+-(void)showAlert:(NSString *)title withMessage:(NSString *)message{
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:title
+                                                       message:message
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+    [theAlert show];
 }
 
 - (IBAction)needToLoginTapped:(id)sender {

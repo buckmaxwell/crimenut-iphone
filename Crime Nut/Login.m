@@ -43,12 +43,7 @@
     NSString *uname = usernameText.text;
     NSString *pword = passwordText.text;
     if( [uname isEqualToString:@""] || [pword isEqualToString:@""] ){
-        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Great scott!"
-                                                           message:@"Username and password are required"
-                                                          delegate:self
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil];
-        [theAlert show];
+        [self showAlert:@"Something went wrong" withMessage:@"Username and password are required"];
         return;
     }
 
@@ -65,10 +60,7 @@
     NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
                                                        options:0
                                                             error:nil];
-//    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
-//    NSLog(@"1:::%@\n", strData);
-//    NSLog(@"2:::%@", JSONData);
-    // Create a POST request with our JSON as a request body.
+
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:JSONData];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -92,13 +84,15 @@
                                                                            JSONObjectWithData:data
                                                                            options:0
                                                                            error:&error];
-                                       NSLog(@"err::: %@\n",error);
-                                       NSLog(@"response::: %@\n",response);
-                                       NSLog(@"RespDict::: %@\n", responseDictionary);
-                                       apiresponse = [responseDictionary objectForKey:@"ERROR"];
+//                                       NSLog(@"err::: %@\n",error);
+//                                       NSLog(@"response::: %@\n",response);
+//                                       NSLog(@"RespDict::: %@\n", responseDictionary);
+//                                       apiresponse = [responseDictionary objectForKey:@"ERROR"];
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
-//TODO: alert user somehow of error?
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self showAlert:@"We encountered a problem" withMessage:apiresponse];
+                                           });
                                        }else{
                                            //get and store token
                                            NSString *token = [responseDictionary objectForKey:@"token"];
@@ -110,9 +104,7 @@
                                                if(tokenfromstorage){
                                                    //send em to the main screen
                                                    CrimeFeed *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"CrimeFeed"];
-//                                                   [self presentViewController:controller animated:YES completion:nil];
-                                                   
-//                                                   CrimeFeed *controller = [[CrimeFeed alloc] initWithNibName:nil bundle:nil];
+
                                                    UINavigationController *navigationController =
                                                    [[UINavigationController alloc] initWithRootViewController:controller];
                                                    
@@ -123,18 +115,36 @@
                                                                         
                                                                     }];
                                                }else{
-                                                   //TODO: handle storing issues
+                                                   // handle storing issues
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       [self showAlert:@"We encountered a problem" withMessage:@"For some reason we could not save your information on this phone"];
+                                                   });
                                                }
                                            });
                                        }
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                       });
                                    }
                                } else {
                                    NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                   });
                                }
                            }];
 
+}
+
+-(void)showAlert:(NSString *)title withMessage:(NSString *)message{
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:title
+                                                       message:message
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+    [theAlert show];
 }
 
 - (IBAction)needToSignupTapped:(id)sender{

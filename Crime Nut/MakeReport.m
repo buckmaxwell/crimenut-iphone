@@ -51,12 +51,6 @@ CLLocationManager *locationManager;
     // Dispose of any resources that can be recreated.
 }
 
-// Delegate method
-//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-//    CLLocation* loc = [locations lastObject]; // locations is guaranteed to have at least one object
-//    float latitude = loc.coordinate.latitude;
-//    float longitude = loc.coordinate.longitude;
-//}
 
 // The number of columns of data
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
@@ -84,12 +78,7 @@ CLLocationManager *locationManager;
     NSString *what = [subjectCodes objectAtIndex:[subjectPicker selectedRowInComponent:0]];
     NSString *desc = descriptionTextField.text;
     if( [what isEqualToString:@""] || [desc isEqualToString:@""] || [where isEqualToString:@""] ){
-        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Hmmmm..."
-                                                           message:@"Some report information is mising"
-                                                          delegate:self
-                                                 cancelButtonTitle:@"OK"
-                                                 otherButtonTitles:nil];
-        [theAlert show];
+        [self showAlert:@"Hmmmm..." withMessage:@"Some report information is mising"];
         return;
     }
     //get token
@@ -158,12 +147,7 @@ CLLocationManager *locationManager;
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            //alert user somehow of error?
                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                              UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"We encountered a problem"
-                                                                                                 message:apiresponse
-                                                                                                delegate:self
-                                                                                       cancelButtonTitle:@"OK"
-                                                                                       otherButtonTitles:nil];
-                                              [theAlert show];
+                                              [self showAlert:@"We encountered a problem" withMessage:apiresponse];
                                           });
                                        }else{
                                            //get and store token
@@ -184,22 +168,24 @@ CLLocationManager *locationManager;
                                                }else{
                                                    //handle storing issues
                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                       UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Something went amiss"
-                                                                                                          message:@"For some reason we couldnt process your report.\nSorry about that."
-                                                                                                         delegate:self
-                                                                                                cancelButtonTitle:@"OK"
-                                                                                                otherButtonTitles:nil];
-                                                       [theAlert show];
+                                                       [self showAlert:@"Something went amiss" withMessage:@"For some reason we couldnt process your report.\nSorry about that."];
                                                    });
                                                }
                                            });
                                        }
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
-                                       
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                       });
+
                                    }
                                } else {
                                    NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                   });
+
                                }
                            }];
 
@@ -208,6 +194,15 @@ CLLocationManager *locationManager;
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [locationManager stopUpdatingLocation];
+}
+
+-(void)showAlert:(NSString *)title withMessage:(NSString *)message{
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:title
+                                                       message:message
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+    [theAlert show];
 }
 
 @end

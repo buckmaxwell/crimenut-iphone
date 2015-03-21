@@ -28,6 +28,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     NSLog(@"id%@",reportId);
+    //call for comments
+    
 }
 
 /*
@@ -101,42 +103,38 @@
                                            apiresponse = [responseDictionary objectForKey:@"ERROR"];
                                            if (apiresponse) {
                                                NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
-                                               
                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                   UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Something went amiss"
-                                                                                                      message:apiresponse
-                                                                                                     delegate:self
-                                                                                            cancelButtonTitle:@"OK"
-                                                                                            otherButtonTitles:nil];
-                                                   [theAlert show];
+                                                   [self showAlert:@"Something went amiss" withMessage:apiresponse];
                                                });
                                                
                                            }else{
-                                    
                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                   UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Thanks!"
-                                                                                                      message:@"This post now has a lower priority than others."
-                                                                                                     delegate:self
-                                                                                            cancelButtonTitle:@"OK"
-                                                                                            otherButtonTitles:nil];
-                                                   [theAlert show];
+                                                    [self showAlert:@"Thanks!" withMessage:@"This post now has a lower priority than others."];
                                                });
                                            }
                                        }else{
                                            NSLog(@"STATUS: %ld\n",(long)statusCode);
+                                           dispatch_async(dispatch_get_main_queue(), ^{
+                                               [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                           });
                                        }
                                    } else {
                                        NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                       });
                                    }
                                }];
-        
-        
-        
-        
-        
-        
-        
     }
+}
+
+-(void)showAlert:(NSString *)title withMessage:(NSString *)message{
+    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:title
+                                                       message:message
+                                                      delegate:self
+                                             cancelButtonTitle:@"OK"
+                                             otherButtonTitles:nil];
+    [theAlert show];
 }
 
 
