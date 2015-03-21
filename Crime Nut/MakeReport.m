@@ -40,7 +40,7 @@ CLLocationManager *locationManager;
     }else{
         NSLog(@"well no fuckin wonder\n");
     }
-    pickerData = @[@"Theft", @"Criminal Damaging", @"Burglary",@"Assault",@"Menacing", @"Vandalism",@"Robbery",@"Other"];
+    pickerData = @[@"Theft", @"Property Damage", @"Burglary",@"Assault",@"Menacing", @"Vandalism",@"Robbery",@"Other"];
     subjectCodes = @[@"115",          @"551",                   @"6969",          @"254",           @"255",               @"554",               @"450",           @"0000"];
     subjectPicker.dataSource = self;
     subjectPicker.delegate = self;

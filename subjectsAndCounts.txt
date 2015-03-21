@@ -6,40 +6,25 @@
  Criminal Damaging                         | 551  |  6272
  Fraud                                     | 400  |  4963
  Menacing                                  | 255  |  4330
- Theft - From Motor Vehicle - Felony       | 117  |  4179
  Motor Vehicle Theft                       | 200  |  3813
  Robbery                                   | 450  |  2333
  Burglary - Zone 3                         | 103  |  2262
- Burglary - Zone 2                         | 102  |  2103
  Vandalism                                 | 554  |  2056
  Telecommunication Harassment              | 552  |  1974
- Burglary - Zone 4                         | 104  |  1689
- Burglary - Zone 1                         | 101  |  1438
  Trespassing                               | 550  |  1141
- Felony Theft - Zone 1                     | 107  |  1136
- Burglary - Zone 5                         | 105  |  1071
  FCCS Referral - SVB Detectives Only       | 717  |  1015
- Felony Theft - Zone 2                     | 108  |  1002
- Felony Theft - Zone 3                     | 109  |   944
  Theft of License Plate                    | 201  |   857
- Felony Theft - Zone 4                     | 110  |   745
- Felony Theft - Zone 5                     | 111  |   673
  Theft - Prescription Drugs                | 119  |   629
  Felony Assault                            | 262  |   513
  Rape/Sexual Assault Vic 16 Yr and Older   | 300  |   473
  Disorderly Conduct                        | 712  |   457
  Miscellaneous Offense                     | 701  |   445
  Burglary - Zone 3 - ATTEMPT               | 103a |   332
- Burglary - Zone 2 - ATTEMPT               | 102a |   310
  Forgery                                   | 401  |   301
  Discharged Firearms - Occupied Structure  | 260  |   291
  Motor Vehicle Theft - ATTEMPT             | 200a |   285
  Embezzlement                              | 501  |   220
- Theft - Involving Elderly / Disabled      | 114  |   219
- Burglary - Zone 1 -  ATTEMPT              | 101a |   218
- Burglary - Zone 4 - ATTEMPT               | 104a |   206
  Damage To Property                        | 706  |   198
- Theft of Negotiable Instrument            | 113  |   193
  Rape/Sexual Assault Vic 15 Yr and Younger | 301  |   171
  Unauthorized Use of a Motor Vehicle       | 203  |   136
  Miscellaneous Incident                    | 700  |   132

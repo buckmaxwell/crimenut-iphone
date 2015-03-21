@@ -219,6 +219,23 @@
                                     <action selector="spamButtonTapped:" destination="SJW-76-d6W" eventType="touchUpInside" id="5qz-Wf-akc"/>
                                 </connections>
                             </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GC7-78-NKN">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="185" id="tqY-pI-exP"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="tqY-pI-exP"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="262" width="368" height="185"/>
+                                    <mask key="constraints">
+                                        <include reference="tqY-pI-exP"/>
+                                    </mask>
+                                </variation>
+                            </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="Description" text="DESCRIPTION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSt-87-gWV">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <constraints>
@@ -280,10 +297,13 @@
                             <constraint firstAttribute="trailing" secondItem="ELY-ly-ZF7" secondAttribute="trailing" constant="16" id="GK6-xZ-4pp"/>
                             <constraint firstItem="vlW-Yq-sL2" firstAttribute="leading" secondItem="dSt-87-gWV" secondAttribute="trailing" constant="8" id="ISn-k8-fnQ"/>
                             <constraint firstItem="vlW-Yq-sL2" firstAttribute="top" secondItem="Ali-kj-ZFb" secondAttribute="bottom" constant="28" id="QMR-vP-a3J"/>
+                            <constraint firstAttribute="trailing" secondItem="GC7-78-NKN" secondAttribute="trailing" constant="16" id="Qxx-Zu-FC4"/>
+                            <constraint firstItem="GC7-78-NKN" firstAttribute="top" secondItem="sUI-em-Yc1" secondAttribute="bottom" constant="8" id="Rkx-e0-yyx"/>
                             <constraint firstItem="y3U-ra-XPK" firstAttribute="leading" secondItem="zsO-zB-yze" secondAttribute="leading" constant="16" id="UH0-Ak-Mbx"/>
                             <constraint firstItem="gdd-Iy-WX4" firstAttribute="top" secondItem="sUI-em-Yc1" secondAttribute="bottom" constant="384" id="XSL-Bg-5rf"/>
                             <constraint firstAttribute="trailing" secondItem="Ali-kj-ZFb" secondAttribute="trailing" constant="16" id="YEX-JM-TWc"/>
                             <constraint firstItem="y3U-ra-XPK" firstAttribute="top" secondItem="ELY-ly-ZF7" secondAttribute="bottom" constant="8" id="a1D-fM-Kzi"/>
+                            <constraint firstItem="GC7-78-NKN" firstAttribute="leading" secondItem="zsO-zB-yze" secondAttribute="leading" constant="16" id="b9b-3F-gcr"/>
                             <constraint firstItem="R7E-7I-sKu" firstAttribute="top" secondItem="Ali-kj-ZFb" secondAttribute="bottom" constant="8" id="bIq-cU-deX"/>
                             <constraint firstItem="Ali-kj-ZFb" firstAttribute="top" secondItem="y3U-ra-XPK" secondAttribute="bottom" constant="8" id="bUb-5W-w3m"/>
                             <constraint firstAttribute="trailing" secondItem="y3U-ra-XPK" secondAttribute="trailing" constant="16" id="dfD-Lt-rdv"/>
@@ -303,6 +323,7 @@
                                 <exclude reference="Ali-kj-ZFb"/>
                                 <exclude reference="R7E-7I-sKu"/>
                                 <exclude reference="vlW-Yq-sL2"/>
+                                <exclude reference="GC7-78-NKN"/>
                                 <exclude reference="dSt-87-gWV"/>
                                 <exclude reference="sUI-em-Yc1"/>
                             </mask>
@@ -336,6 +357,9 @@
                                 <exclude reference="46D-4r-xBo"/>
                                 <exclude reference="kmN-BG-Thc"/>
                                 <exclude reference="za2-rB-JCn"/>
+                                <exclude reference="Qxx-Zu-FC4"/>
+                                <exclude reference="Rkx-e0-yyx"/>
+                                <exclude reference="b9b-3F-gcr"/>
                                 <exclude reference="XSL-Bg-5rf"/>
                             </mask>
                         </variation>
@@ -346,6 +370,7 @@
                                 <include reference="Ali-kj-ZFb"/>
                                 <include reference="R7E-7I-sKu"/>
                                 <include reference="vlW-Yq-sL2"/>
+                                <include reference="GC7-78-NKN"/>
                                 <include reference="dSt-87-gWV"/>
                                 <include reference="sUI-em-Yc1"/>
                             </mask>
@@ -379,6 +404,9 @@
                                 <include reference="46D-4r-xBo"/>
                                 <include reference="kmN-BG-Thc"/>
                                 <include reference="za2-rB-JCn"/>
+                                <include reference="Qxx-Zu-FC4"/>
+                                <include reference="Rkx-e0-yyx"/>
+                                <include reference="b9b-3F-gcr"/>
                                 <exclude reference="XSL-Bg-5rf"/>
                             </mask>
                         </variation>
@@ -386,6 +414,7 @@
                     <connections>
                         <outlet property="descriptionLabel" destination="sUI-em-Yc1" id="kH1-v3-hIL"/>
                         <outlet property="locationLabel" destination="R7E-7I-sKu" id="yeu-Ms-8YA"/>
+                        <outlet property="mapView" destination="GC7-78-NKN" id="4dI-8P-pcc"/>
                         <outlet property="subjectLabel" destination="Ali-kj-ZFb" id="Ybs-fK-LMR"/>
                         <outlet property="timeStampLabel" destination="ELY-ly-ZF7" id="i0d-mn-cV5"/>
                         <outlet property="titleLabel" destination="y3U-ra-XPK" id="Uxj-ky-awa"/>

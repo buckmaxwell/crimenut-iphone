@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+
 
 @interface ViewReport : UIViewController
 
@@ -17,5 +19,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *subjectLabel;
 @property (strong,nonatomic) NSString *reportId;
 - (IBAction)spamButtonTapped:(id)sender;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
+
 
 @end

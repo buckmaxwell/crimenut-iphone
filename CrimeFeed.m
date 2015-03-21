@@ -286,13 +286,11 @@ CLLocationManager *locationManager;
     NSString *location = [NSString stringWithFormat:@"%@%@%@%@",housNum,streetPrefix,street,streetSuffix];
 
     self.ViewReport.titleLabel.text = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"title"];
-    self.ViewReport.descriptionLabel.text = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"description"];
     self.ViewReport.timeStampLabel.text = time;
     self.ViewReport.subjectLabel.text =[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
     self.ViewReport.locationLabel.text = location;
     self.ViewReport.reportId = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"id"];
-    NSLog(@"reportID: %@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"id"]);
-    
+    self.ViewReport.descriptionLabel.text = @"";
     [self.navigationController pushViewController:self.ViewReport animated:YES];
 }
 

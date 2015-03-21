@@ -23,6 +23,7 @@
 		9F901B991AB50D4A0083DABC /* Crime_NutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901B981AB50D4A0083DABC /* Crime_NutTests.m */; };
 		9F901BA41AB50F3A0083DABC /* Signup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901BA31AB50F3A0083DABC /* Signup.m */; };
 		9FE53BFD1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */; };
+		9FE53BFF1ABE273A0074F1D5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE53BFE1ABE273A0074F1D5 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		9F901BA31AB50F3A0083DABC /* Signup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Signup.m; sourceTree = "<group>"; };
 		9FE53BFB1ABDBF600074F1D5 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
+		9FE53BFE1ABE273A0074F1D5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE53BFF1ABE273A0074F1D5 /* MapKit.framework in Frameworks */,
 				9F814E611ABB79860050C511 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,6 +93,7 @@
 		9F901B701AB50D4A0083DABC = {
 			isa = PBXGroup;
 			children = (
+				9FE53BFE1ABE273A0074F1D5 /* MapKit.framework */,
 				9F814E601ABB79860050C511 /* CoreLocation.framework */,
 				9F901B7B1AB50D4A0083DABC /* Crime Nut */,
 				9F901B951AB50D4A0083DABC /* Crime NutTests */,
