@@ -193,7 +193,7 @@
     if(minutesSince == 1)
         return @"1 minute ago";
     else
-        return [NSString stringWithFormat:@"%d min ago", minutesSince];
+        return [NSString stringWithFormat:@"%dmin ago", minutesSince];
 }
 
 
@@ -207,7 +207,7 @@
     if(hoursSince == 1)
         return @"1 hour ago";
     else
-        return [NSString stringWithFormat:@"%d h ago", hoursSince];
+        return [NSString stringWithFormat:@"%dh ago", hoursSince];
 }
 
 
@@ -219,7 +219,7 @@
     
     //Format
     [dateFormatter setDateFormat:@"h:mma"];
-    return [NSString stringWithFormat:@"Yesterday @ %@", [dateFormatter stringFromDate:self]];
+    return [NSString stringWithFormat:@"Yesterday @%@", [dateFormatter stringFromDate:self]];
 }
 
 
@@ -230,7 +230,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 
     //Format
-    [dateFormatter setDateFormat:@"EEEE '@' h:mma"];
+    [dateFormatter setDateFormat:@"EEEE '@'h:mma"];
     return [dateFormatter stringFromDate:self];
 }
 
@@ -242,7 +242,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
     //Format
-    [dateFormatter setDateFormat:@"MMMM d '@' h:mma"];
+    [dateFormatter setDateFormat:@"MMMM d '@'h:mma"];
     return [dateFormatter stringFromDate:self];
 }
 

@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *subjectLabel;
 @property (strong,nonatomic) NSString *reportId;
+- (IBAction)spamButtonTapped:(id)sender;
 
 @end

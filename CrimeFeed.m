@@ -25,48 +25,6 @@ CLLocationManager *locationManager;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *token = [defaults stringForKey:@"token"];
-    //NSLog(@"token:::::%@", token);
-
-    if(token){
-        
-    }else{
-        NSLog(@"well no fuckin wonder\n");
-    }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-//// Delegate method
-//- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-//    CLLocation* loc = [locations lastObject]; // locations is guaranteed to have at least one object
-//    float latitude = loc.coordinate.latitude;
-//    float longitude = loc.coordinate.longitude;
-//}
-
-//3// location services were approved
--(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    NSLog(@"//3// location services were approved\n");
-    if (status == kCLAuthorizationStatusDenied) {
-        //location denied, handle accordingly
-    }
-    else if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
-        NSLog(@"//4// get feed//\n");
-        [self getFeed];
-        //4// get feed//
-
-    }
-    
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
     //check if user is logged in
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults stringForKey:@"token"];
@@ -81,7 +39,7 @@ CLLocationManager *locationManager;
         [self.tableView setDelegate:self];
         self.tableView.rowHeight = 100;
         //        self.tableView.rowHeight = UITableViewAutomaticDimension;
-       // self.tableView.estimatedRowHeight = 160.0;
+        // self.tableView.estimatedRowHeight = 160.0;
         
         if ([CLLocationManager locationServicesEnabled]) {
             locationManager = [[CLLocationManager alloc] init];
@@ -94,9 +52,30 @@ CLLocationManager *locationManager;
             locationManager.distanceFilter = kCLDistanceFilterNone;
             locationManager.desiredAccuracy = kCLLocationAccuracyBest;
             [locationManager startUpdatingLocation];
-                            NSLog(@"//2.5//get the location to turn on\n");
+            NSLog(@"//2.5//get the location to turn on\n");
         }
     }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+//3// location services were approved
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    NSLog(@"//3// location services were approved\n");
+    if (status == kCLAuthorizationStatusDenied) {
+        //location denied, handle accordingly
+    }
+    else if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        NSLog(@"//4// get feed//\n");
+        [self getFeed];
+        //4// get feed//
+
+    }
+    
 }
 
 
@@ -190,10 +169,6 @@ CLLocationManager *locationManager;
 }
 
 #pragma mark - Table view data source
-
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 80;
-//}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -301,7 +276,9 @@ CLLocationManager *locationManager;
     self.ViewReport.timeStampLabel.text = time;
     self.ViewReport.subjectLabel.text =[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
     self.ViewReport.locationLabel.text = location;
-        NSLog(@"instantiating %@\n", [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"]);
+    self.ViewReport.reportId = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"id"];
+    NSLog(@"reportID: %@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"id"]);
+    
     [self.navigationController pushViewController:self.ViewReport animated:YES];
 }
 
