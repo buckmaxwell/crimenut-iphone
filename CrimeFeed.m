@@ -9,10 +9,13 @@
 #import "CrimeFeed.h"
 #import "Login.h"
 #import "FeedCell.h"
+#import "ViewReport.h"
+#import "NSDate+NVTimeAgo.h"
 
 @interface CrimeFeed ()<CLLocationManagerDelegate>
 
 @property (nonatomic, strong) NSArray *reportPosts;
+@property (nonatomic,strong) ViewReport *ViewReport;
 
 @end
 
@@ -117,7 +120,7 @@ CLLocationManager *locationManager;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
     // Create a simple dictionary with numbers.
-    NSDictionary *dictionary = @{@"token":tokenfromstorage, @"lon":longitude.stringValue, @"lat":latitude.stringValue};
+    NSDictionary *dictionary = @{@"token":tokenfromstorage, @"lon":longitude.stringValue, @"lat":latitude.stringValue,@"miles":@"200"};
     
     // Convert the dictionary into JSON data.
     NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
@@ -160,7 +163,7 @@ CLLocationManager *locationManager;
                                        }else{
                                            NSIndexPath *myIndex = [NSIndexPath indexPathForRow:0 inSection:0] ;
                                            self.reportPosts = [responseDictionary objectForKey:@"reports"];
-                                                                                                                                                                NSLog(@"self.reportPosts=%@\n", self.reportPosts);
+//                                                                                                                                                                NSLog(@"self.reportPosts=%@\n", self.reportPosts);
                                            //6// update the tableview
                                            NSLog(@"//6// update the tableview\n");
                                            [self.tableView cellForRowAtIndexPath:myIndex];
@@ -228,7 +231,23 @@ CLLocationManager *locationManager;
         if([streetSuffix isEqualToString:@" None"]){ streetSuffix = @"";}
         
         if([time isEqualToString:@"None"]){ time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_reported"];}
-        if([time isEqualToString:@"None"]){ time = @"";}
+        if([time isEqualToString:@"None"]){ time = @"";}else{
+        
+            NSRange range = [time rangeOfString:@"."];
+            time = [time substringWithRange:NSMakeRange(0, range.location)];
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+            NSDate *myDate = [dateFormatter dateFromString:time];
+            
+            NSString *timeago = [myDate formattedAsTimeAgo];
+            time = timeago;
+        }
+        
+        if ([subject rangeOfString:@"Burglary"].location != NSNotFound) {
+            subject = @"Burglary";
+        }
+        
         
         NSString *location = [NSString stringWithFormat:@"%@%@%@%@",housNum,streetPrefix,street,streetSuffix];
 
@@ -238,6 +257,52 @@ CLLocationManager *locationManager;
         cell.subtitleLabel.text = subject;
     });
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.ViewReport == nil)
+    {
+        NSLog(@"instantiating\n");
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName: @"Main"
+                                                             bundle: nil];
+        self.ViewReport = [storyboard instantiateViewControllerWithIdentifier: @"ViewReport"];
+        [self.ViewReport view];
+    }
+    
+    NSString *time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_began"];
+    if([time isEqualToString:@"None"]){ time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_reported"];}
+    if([time isEqualToString:@"None"]){ time = @"";}else{
+        
+        NSRange range = [time rangeOfString:@"."];
+        time = [time substringWithRange:NSMakeRange(0, range.location)];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+        NSDate *myDate = [dateFormatter dateFromString:time];
+        
+        NSString *timeago = [myDate formattedAsTimeAgo];
+        time = timeago;
+    }
+    
+    NSString *housNum = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"house_number"]];
+    NSString *streetPrefix = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street_prefix"]];
+    NSString *street = [NSString stringWithFormat:@"%@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street"]];
+    NSString *streetSuffix = [NSString stringWithFormat:@" %@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street_suffix"]];
+    if([housNum isEqualToString:@"None "]){ housNum = @"";}
+    if([streetPrefix isEqualToString:@"None "]){ streetPrefix = @"";}
+    if([street isEqualToString:@"None"]){ street = @"";}
+    if([streetSuffix isEqualToString:@" None"]){ streetSuffix = @"";}
+    
+    NSString *location = [NSString stringWithFormat:@"%@%@%@%@",housNum,streetPrefix,street,streetSuffix];
+
+    self.ViewReport.titleLabel.text = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"title"];
+    self.ViewReport.descriptionLabel.text = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"description"];
+    self.ViewReport.timeStampLabel.text = time;
+    self.ViewReport.subjectLabel.text =[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
+    self.ViewReport.locationLabel.text = location;
+        NSLog(@"instantiating %@\n", [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"]);
+    [self.navigationController pushViewController:self.ViewReport animated:YES];
 }
 
 

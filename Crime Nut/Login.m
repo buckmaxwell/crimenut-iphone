@@ -42,7 +42,16 @@
 - (IBAction)loginTapped:(id)sender{
     NSString *uname = usernameText.text;
     NSString *pword = passwordText.text;
-    
+    if( [uname isEqualToString:@""] || [pword isEqualToString:@""] ){
+        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Great scott!"
+                                                           message:@"Username and password are required"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [theAlert show];
+        return;
+    }
+
     // URL of the endpoint we're going to contact.
 
     NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/users/login"];

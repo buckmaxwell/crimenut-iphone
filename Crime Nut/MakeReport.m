@@ -77,24 +77,31 @@ CLLocationManager *locationManager;
 }
 
 - (IBAction)postButtonTapped:(id)sender {
+    
     NSString *title =titleTextField.text;
     NSString *where = whereTextField.text;
     //NSString *when = whenTextField.text;
     NSString *what = [subjectCodes objectAtIndex:[subjectPicker selectedRowInComponent:0]];
     NSString *desc = descriptionTextField.text;
-    
+    if( [what isEqualToString:@""] || [desc isEqualToString:@""] || [where isEqualToString:@""] ){
+        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Hmmmm..."
+                                                           message:@"Some report information is mising"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [theAlert show];
+        return;
+    }
     //get token
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *tokenfromstorage = [defaults stringForKey:@"token"];
 
     //get lat and long
-
     NSNumber *latitude = [NSNumber numberWithFloat:locationManager.location.coordinate.latitude];
     NSNumber *longitude = [NSNumber numberWithFloat:locationManager.location.coordinate.longitude];
     
     // URL of the endpoint we're going to contact.
-    NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/new"];
-    
+    NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/new"];    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
     NSArray *empty = @[];
@@ -110,7 +117,7 @@ CLLocationManager *locationManager;
                                  @"offenses":empty,
                                  @"perpetrators":empty,
                                  @"property":empty};
-    NSLog(@"%@ ~ LAT:%@ ~LONG:%@\n", where,latitude.stringValue,longitude.stringValue);
+    //NSLog(@"%@ ~ LAT:%@ ~LONG:%@\n", where,latitude.stringValue,longitude.stringValue);
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Convert the dictionary into JSON data.
     NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
@@ -149,7 +156,15 @@ CLLocationManager *locationManager;
                                        apiresponse = [responseDictionary objectForKey:@"ERROR"];
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
-                                           //TODO: alert user somehow of error?
+                                           //alert user somehow of error?
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"We encountered a problem"
+                                                                                                 message:apiresponse
+                                                                                                delegate:self
+                                                                                       cancelButtonTitle:@"OK"
+                                                                                       otherButtonTitles:nil];
+                                              [theAlert show];
+                                          });
                                        }else{
                                            //get and store token
                                            NSString *idfromJson = [responseDictionary objectForKey:@"id"];
@@ -167,12 +182,21 @@ CLLocationManager *locationManager;
                                                                     completion:^{
                                                                     }];
                                                }else{
-                                                   //TODO: handle storing issues
+                                                   //handle storing issues
+                                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                                       UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Something went amiss"
+                                                                                                          message:@"For some reason we couldnt process your report.\nSorry about that."
+                                                                                                         delegate:self
+                                                                                                cancelButtonTitle:@"OK"
+                                                                                                otherButtonTitles:nil];
+                                                       [theAlert show];
+                                                   });
                                                }
                                            });
                                        }
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
+                                       
                                    }
                                } else {
                                    NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);

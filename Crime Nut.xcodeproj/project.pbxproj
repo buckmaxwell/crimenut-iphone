@@ -22,6 +22,7 @@
 		9F901B8D1AB50D4A0083DABC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F901B8B1AB50D4A0083DABC /* LaunchScreen.xib */; };
 		9F901B991AB50D4A0083DABC /* Crime_NutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901B981AB50D4A0083DABC /* Crime_NutTests.m */; };
 		9F901BA41AB50F3A0083DABC /* Signup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901BA31AB50F3A0083DABC /* Signup.m */; };
+		9FE53BFD1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		9F901B981AB50D4A0083DABC /* Crime_NutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Crime_NutTests.m; sourceTree = "<group>"; };
 		9F901BA21AB50F3A0083DABC /* Signup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Signup.h; sourceTree = "<group>"; };
 		9F901BA31AB50F3A0083DABC /* Signup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Signup.m; sourceTree = "<group>"; };
+		9FE53BFB1ABDBF600074F1D5 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
+		9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 				9F901B801AB50D4A0083DABC /* AppDelegate.h */,
 				9F901B811AB50D4A0083DABC /* AppDelegate.m */,
 				9F901B861AB50D4A0083DABC /* Main.storyboard */,
+				9FE53BFB1ABDBF600074F1D5 /* NSDate+NVTimeAgo.h */,
+				9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */,
 				9F814E6B1ABBEEB10050C511 /* ViewReport.h */,
 				9F814E6C1ABBEEB10050C511 /* ViewReport.m */,
 				9F814E651ABBE52C0050C511 /* FeedCell.h */,
@@ -265,6 +270,7 @@
 				9F814E5F1ABB05B80050C511 /* MakeReport.m in Sources */,
 				9F814E641ABBDDAE0050C511 /* CrimeFeed.m in Sources */,
 				9F814E5C1ABAFC6B0050C511 /* CallAuthorities.m in Sources */,
+				9FE53BFD1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m in Sources */,
 				9F36733E1AB7AB1500362DA9 /* ContactAuthorities.m in Sources */,
 				9F901BA41AB50F3A0083DABC /* Signup.m in Sources */,
 				9F901B821AB50D4A0083DABC /* AppDelegate.m in Sources */,

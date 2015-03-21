@@ -42,8 +42,16 @@
 - (IBAction)signupTapped:(id)sender {
     NSString *uname = usernameTextField.text;
     NSString *pword = passwordTextField.text;
-    NSLog(@"U= %@ .... P= %@", uname, pword);
-    
+    //NSLog(@"U= %@ .... P= %@", uname, pword);
+    if( [uname isEqualToString:@""] || [pword isEqualToString:@""] ){
+        UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:@"Something went wrong"
+                                                           message:@"Username and password are required"
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
+        [theAlert show];
+        return;
+    }
     // URL of the endpoint we're going to contact.
     
     NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/users/new"];
