@@ -20,6 +20,8 @@
 @property (strong,nonatomic) NSString *reportId;
 - (IBAction)spamButtonTapped:(id)sender;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet UITextField *commentTextField;
+- (IBAction)postCommentTapped:(id)sender;
 
 
 @end

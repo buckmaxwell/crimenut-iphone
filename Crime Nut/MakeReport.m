@@ -19,7 +19,7 @@
 @synthesize titleTextField;
 @synthesize whereTextField;
 @synthesize whenTextField;
-//@synthesize whatHappenedTextField;
+@synthesize whatHappenedTextField;
 @synthesize subjectPicker;
 @synthesize descriptionTextField;
 
@@ -49,6 +49,18 @@ CLLocationManager *locationManager;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+
+    [titleTextField endEditing:YES];
+    [whereTextField endEditing:YES];
+    [whenTextField endEditing:YES];
+    [whatHappenedTextField endEditing:YES];
+    [subjectPicker endEditing:YES];
+    [descriptionTextField endEditing:YES];
+    
 }
 
 
