@@ -12,6 +12,9 @@
 @interface MakeReport () <CLLocationManagerDelegate>{
     NSArray *pickerData;
     NSArray *subjectCodes;
+//    CGFloat originalCenter;
+//    CGPoint centerPointer;
+    
 }@end
 
 @implementation MakeReport
@@ -28,6 +31,11 @@ CLLocationManager *locationManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+//    centerPointer = self.view.center;
+//    originalCenter = self.view.center.y;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    
     if ([CLLocationManager locationServicesEnabled]) {
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
@@ -41,7 +49,7 @@ CLLocationManager *locationManager;
         NSLog(@"well no fuckin wonder\n");
     }
     pickerData = @[@"Theft", @"Property Damage", @"Burglary",@"Assault",@"Menacing", @"Vandalism",@"Robbery",@"Other"];
-    subjectCodes = @[@"115",          @"551",                   @"6969",          @"254",           @"255",               @"554",               @"450",           @"0000"];
+    subjectCodes = @[@"115",          @"551",                   @"6969",          @"254",           @"255",       @"554",        @"450",        @"0000"];
     subjectPicker.dataSource = self;
     subjectPicker.delegate = self;
 }
@@ -50,6 +58,17 @@ CLLocationManager *locationManager;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+////find method for when textfield begins editting
+//-(void) keyboardDidShow:(NSNotification *) notification
+//{
+//    if(titleTextField.isEditing == NO){
+//        NSLog(@"%f",originalCenter);
+//        self.view.center = CGPointMake(centerPointer.x, 200);
+//    }
+//}
+
+
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -60,7 +79,9 @@ CLLocationManager *locationManager;
     [whatHappenedTextField endEditing:YES];
     [subjectPicker endEditing:YES];
     [descriptionTextField endEditing:YES];
-    
+//    NSLog(@"%f",originalCenter);
+//    self.view.center = CGPointMake(centerPointer.x,originalCenter);
+//    
 }
 
 

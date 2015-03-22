@@ -292,6 +292,7 @@ CLLocationManager *locationManager;
     self.ViewReport.reportId = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"id"];
     self.ViewReport.descriptionLabel.text = @"";
     self.ViewReport.commentTextField.text = @"";
+    self.ViewReport.commentsLabel.text = @"";
     [self.navigationController pushViewController:self.ViewReport animated:YES];
 }
 

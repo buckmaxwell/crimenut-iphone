@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 
 
-@interface ViewReport : UIViewController
+@interface ViewReport : UIViewController<UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *timeStampLabel;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) IBOutlet UITextField *commentTextField;
 - (IBAction)postCommentTapped:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *commentsLabel;
 
 
 @end

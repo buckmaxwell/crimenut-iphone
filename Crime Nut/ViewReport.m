@@ -23,6 +23,7 @@
 
 @synthesize reportId;
 @synthesize commentTextField;
+@synthesize commentsLabel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -113,10 +114,11 @@
                                                [annotation setCoordinate:loc.coordinate];
                                                [self.mapView addAnnotation:annotation];
                                                
+                                               self.reportComments =  [responseDictionary objectForKey:@"comments"];
+                                               NSLog(@"comments: %@",self.reportComments);
+                                               [self getComments];
                                            });
-                                           self.reportComments =  [responseDictionary objectForKey:@"comments"];
-                                           NSLog(@"comments: %@",self.reportComments);
-                                           [self getComments];
+                                           
                                        }
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
@@ -151,7 +153,17 @@
 
 //still to come
 - (void) getComments{
-    
+    NSString *comment = @"";
+    commentsLabel.numberOfLines = 0;
+    for (int i = 0; i < self.reportComments.count; i++) {
+        comment = [NSString stringWithFormat:@"%@\n%@\n",
+                   comment,
+                   [[self.reportComments objectAtIndex:i] objectForKey:@"content"]];
+    }
+    commentsLabel.text = comment;
+    //CGSize maxSize = CGSizeMake(320, 410);
+    //CGRect labrect = [comment boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:commentsLabel.font} context:Nil];
+    //commentsLabel.frame = CGRectMake(20, 460, 368, labrect.size.height);
 }
 
 
