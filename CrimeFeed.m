@@ -14,8 +14,10 @@
 
 @interface CrimeFeed ()<CLLocationManagerDelegate>
 
-@property (nonatomic, strong) NSArray *reportPosts;
+@property (nonatomic, strong) NSMutableArray *reportPosts;
 @property (nonatomic,strong) ViewReport *ViewReport;
+@property (nonatomic, strong) NSNumber *currentPage;
+@property (nonatomic, assign) BOOL endOfFeed;
 
 @end
 
@@ -34,7 +36,7 @@ CLLocationManager *locationManager;
         Login *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
         [self presentViewController:controller animated:YES completion:nil];
     }else{
-        
+        self.endOfFeed = NO;
         [self.tableView setDataSource:self];
         [self.tableView setDelegate:self];
         self.tableView.rowHeight = 100;
@@ -71,7 +73,7 @@ CLLocationManager *locationManager;
     }
     else if (status == kCLAuthorizationStatusAuthorizedWhenInUse) {
         NSLog(@"//4// get feed//\n");
-        [self getFeed];
+        [self getFeed:[NSNumber numberWithInt:1]];
         //4// get feed//
 
     }
@@ -80,7 +82,7 @@ CLLocationManager *locationManager;
 
 
 //5// get the posts
--(void)getFeed{
+-(void)getFeed:(NSNumber *)page{
     
     NSLog(@"//5// get the posts\n");
     
@@ -99,16 +101,12 @@ CLLocationManager *locationManager;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
     // Create a simple dictionary with numbers.
-    NSDictionary *dictionary = @{@"token":tokenfromstorage, @"lon":longitude.stringValue, @"lat":latitude.stringValue,@"miles":@"200"};
+    NSDictionary *dictionary = @{@"token":tokenfromstorage, @"lon":longitude.stringValue, @"lat":latitude.stringValue,@"page":page};
     
     // Convert the dictionary into JSON data.
     NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
                                                        options:0
                                                          error:nil];
-    //    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
-    //    NSLog(@"1:::%@\n", strData);
-    //    NSLog(@"2:::%@", JSONData);
-    // Create a POST request with our JSON as a request body.
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:JSONData];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
@@ -140,13 +138,22 @@ CLLocationManager *locationManager;
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            //TODO: alert user somehow of error?
                                        }else{
-                                           NSIndexPath *myIndex = [NSIndexPath indexPathForRow:0 inSection:0] ;
-                                           self.reportPosts = [responseDictionary objectForKey:@"reports"];
+                                           NSIndexPath *myIndex = [NSIndexPath indexPathForRow:self.reportPosts.count inSection:0] ;
+                                           if(self.reportPosts.count == 0){
+                                               self.reportPosts = [[responseDictionary objectForKey:@"reports"] mutableCopy];
+                                           }else{
+                                               [self.reportPosts addObjectsFromArray:[[responseDictionary objectForKey:@"reports"] mutableCopy]];
+                                           }
+                                           apiresponse = [responseDictionary objectForKey:@"next_page"];
+                                           if (!apiresponse) {
+                                               self.endOfFeed = YES;
+                                           }
                                            //6// update the tableview
                                            NSLog(@"//6// update the tableview\n");
                                            [self.tableView cellForRowAtIndexPath:myIndex];
                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                 NSLog(@"//7// reload data\n");
+                                                self.currentPage = page;
                                                 [self.tableView reloadData];
                                            });
                                        }
@@ -166,6 +173,13 @@ CLLocationManager *locationManager;
     
 }
 
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    double percentScrolled = scrollView.contentOffset.y / scrollView.frame.size.height;
+//    if(percentScrolled > 0.62){
+//       NSLog(@"%@", @"halfway!!");
+//    }
+//}
 
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -244,7 +258,17 @@ CLLocationManager *locationManager;
         cell.timeLabel.text = time;
         cell.titleLabel.text = title;
         cell.subtitleLabel.text = subject;
+        
+        if(!self.endOfFeed){
+            if (indexPath.row == [self.reportPosts count] - 1)
+            {
+                NSNumber *nextpage = [NSNumber numberWithInt:[self.currentPage intValue] + 1];
+                [self getFeed:nextpage];
+                NSLog(@"call was made");
+            }
+        }
     });
+
     return cell;
 }
 

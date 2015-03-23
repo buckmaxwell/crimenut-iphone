@@ -12,9 +12,6 @@
 @interface MakeReport () <CLLocationManagerDelegate>{
     NSArray *pickerData;
     NSArray *subjectCodes;
-//    CGFloat originalCenter;
-//    CGPoint centerPointer;
-    
 }@end
 
 @implementation MakeReport
@@ -30,11 +27,7 @@ CLLocationManager *locationManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapReceived:)];
-    [tapGestureRecognizer setDelegate:self];
-    [self.view addGestureRecognizer:tapGestureRecognizer];
-    
+
     if ([CLLocationManager locationServicesEnabled]) {
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
@@ -60,16 +53,6 @@ CLLocationManager *locationManager;
 
 
 
--(void)tapReceived:(UITapGestureRecognizer *)tapGestureRecognizer
-{
-    
-    [titleTextField endEditing:YES];
-    [whereTextField endEditing:YES];
-    [whenTextField endEditing:YES];
-    [subjectPicker endEditing:YES];
-    [descriptionTextField endEditing:YES];
-    
-}
 
 
 // The number of columns of data

@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSArray *reportComments;
 @property (nonatomic, strong) NSNumber *lat;
 @property (nonatomic, strong) NSNumber *lon;
+@property (nonatomic, strong) UIScrollView *handledScrollView;
 
 @end
 
@@ -30,10 +31,7 @@
     // Do any additional setup after loading the view.
     self.descriptionLabel.text = @"";
     [[self mapView] setShowsUserLocation:YES];
-    
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapReceived:)];
-    [tapGestureRecognizer setDelegate:self];
-    [self.view addGestureRecognizer:tapGestureRecognizer];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,10 +40,6 @@
 }
 
 
--(void)tapReceived:(UITapGestureRecognizer *)tapGestureRecognizer
-{
-    [self.commentTextField endEditing:YES];
-}
 
 
 //get lat, lon, desc, comments
@@ -123,6 +117,7 @@
                                                self.reportComments =  [responseDictionary objectForKey:@"comments"];
                                                NSLog(@"comments: %@",self.reportComments);
                                                [self getComments];
+                                               
                                            });
                                            
                                        }
@@ -167,9 +162,14 @@
                    [[self.reportComments objectAtIndex:i] objectForKey:@"content"]];
     }
     commentsLabel.text = comment;
-    //CGSize maxSize = CGSizeMake(320, 410);
-    //CGRect labrect = [comment boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:commentsLabel.font} context:Nil];
-    //commentsLabel.frame = CGRectMake(20, 460, 368, labrect.size.height);
+   
+    [commentsLabel setPreferredMaxLayoutWidth:360];
+    CGSize maxSize = CGSizeMake(360, 410);
+    CGRect expectedLabelSize = [comment boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:commentsLabel.font} context:Nil];
+    CGRect newFrame = commentsLabel.frame;
+    newFrame.size.height = expectedLabelSize.size.height;
+    commentsLabel.frame = newFrame;
+    
 }
 
 
@@ -330,7 +330,6 @@
                                }
                            }];
 }
-
 
 
 @end
