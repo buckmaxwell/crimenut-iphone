@@ -30,6 +30,10 @@
     // Do any additional setup after loading the view.
     self.descriptionLabel.text = @"";
     [[self mapView] setShowsUserLocation:YES];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapReceived:)];
+    [tapGestureRecognizer setDelegate:self];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,7 +41,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+
+-(void)tapReceived:(UITapGestureRecognizer *)tapGestureRecognizer
+{
     [self.commentTextField endEditing:YES];
 }
 

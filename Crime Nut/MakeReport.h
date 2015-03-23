@@ -14,7 +14,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *titleTextField;
 @property (strong, nonatomic) IBOutlet UITextField *whereTextField;
 @property (strong, nonatomic) IBOutlet UITextField *whenTextField;
-@property (strong, nonatomic) IBOutlet UITextField *whatHappenedTextField;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionTextField;
 @property (strong, nonatomic) IBOutlet UIPickerView *subjectPicker;
 - (IBAction)postButtonTapped:(id)sender;

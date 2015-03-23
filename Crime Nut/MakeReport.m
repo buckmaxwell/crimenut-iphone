@@ -22,7 +22,6 @@
 @synthesize titleTextField;
 @synthesize whereTextField;
 @synthesize whenTextField;
-@synthesize whatHappenedTextField;
 @synthesize subjectPicker;
 @synthesize descriptionTextField;
 
@@ -32,9 +31,9 @@ CLLocationManager *locationManager;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    centerPointer = self.view.center;
-//    originalCenter = self.view.center.y;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapReceived:)];
+    [tapGestureRecognizer setDelegate:self];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
     if ([CLLocationManager locationServicesEnabled]) {
         locationManager = [[CLLocationManager alloc] init];
@@ -59,29 +58,17 @@ CLLocationManager *locationManager;
     // Dispose of any resources that can be recreated.
 }
 
-////find method for when textfield begins editting
-//-(void) keyboardDidShow:(NSNotification *) notification
-//{
-//    if(titleTextField.isEditing == NO){
-//        NSLog(@"%f",originalCenter);
-//        self.view.center = CGPointMake(centerPointer.x, 200);
-//    }
-//}
 
 
-
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-
+-(void)tapReceived:(UITapGestureRecognizer *)tapGestureRecognizer
+{
+    
     [titleTextField endEditing:YES];
     [whereTextField endEditing:YES];
     [whenTextField endEditing:YES];
-    [whatHappenedTextField endEditing:YES];
     [subjectPicker endEditing:YES];
     [descriptionTextField endEditing:YES];
-//    NSLog(@"%f",originalCenter);
-//    self.view.center = CGPointMake(centerPointer.x,originalCenter);
-//    
+    
 }
 
 
