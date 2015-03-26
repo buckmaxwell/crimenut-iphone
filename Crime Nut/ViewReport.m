@@ -91,7 +91,7 @@
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self showAlert:@"Something went amiss" withMessage:apiresponse];
+                                               [self showAlert:@"Something went amiss" withMessage:[apiresponse objectAtIndex:0]];
                                            });
                                            
                                        }else{
@@ -102,7 +102,7 @@
                                            CLLocation *loc = [[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]];
                                            NSLog(@"lat:%@,lon:%@",lat,lon);
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               self.descriptionLabel.text = desc;
+											   [self showDescription:desc];
                                                NSMutableArray * annotationsToRemove = [ self.mapView.annotations mutableCopy ] ;
                                                [ annotationsToRemove removeObject:self.mapView.userLocation ] ;
                                                [ self.mapView removeAnnotations:annotationsToRemove ] ;
@@ -152,7 +152,7 @@
 }
 
 
-//still to come
+//get comments and resize the box they sit in
 - (void) getComments{
     NSString *comment = @"";
     commentsLabel.numberOfLines = 0;
@@ -170,6 +170,18 @@
     newFrame.size.height = expectedLabelSize.size.height;
     commentsLabel.frame = newFrame;
     
+}
+
+//set description and resize the box its in
+-(void)showDescription:(NSString *)description{
+	self.descriptionLabel.text = description;
+	self.descriptionLabel.numberOfLines = 0;
+	[self.descriptionLabel setPreferredMaxLayoutWidth:360];
+	CGSize maxSize = CGSizeMake(360, 410);
+	CGRect expectedLabelSize = [description boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.descriptionLabel.font} context:Nil];
+	CGRect newFrame = self.descriptionLabel.frame;
+	newFrame.size.height = expectedLabelSize.size.height;
+	self.descriptionLabel.frame = newFrame;
 }
 
 
