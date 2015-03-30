@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @interface AppDelegate ()
 
@@ -16,9 +17,63 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    return YES;
+	// Override point for customization after application launch.
+	[[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x666666)];
+	[[UINavigationBar appearance] setTintColor:UIColor.whiteColor];
+
+	// Register for Remote Notifications
+	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+	{
+		UIUserNotificationSettings *settings =
+		[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert |
+		 UIUserNotificationTypeBadge |
+		 UIUserNotificationTypeSound categories:nil];
+		[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+		[[UIApplication sharedApplication] registerForRemoteNotifications];
+	}
+	else
+	{
+		[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+		 UIRemoteNotificationTypeAlert |
+		 UIRemoteNotificationTypeBadge |
+		 UIRemoteNotificationTypeSound];
+	}
+	return YES;
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+	NSLog(@"Did Register for Remote Notifications with Device Token (%@)", deviceToken);
+	
+	NSString  *token_string = [[[[deviceToken description]    stringByReplacingOccurrencesOfString:@"<"withString:@""]
+								stringByReplacingOccurrencesOfString:@">" withString:@""]
+							   stringByReplacingOccurrencesOfString: @" " withString: @""];
+	
+	NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+	
+	[defaults setObject:token_string forKey:@"APNSRegID"];
+	[defaults setBool:YES forKey:@"tokenReady"];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+	NSLog(@"Did Fail to Register for Remote Notifications");
+	NSLog(@"%@, %@", error, error.localizedDescription);
+	
+}
+
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+{
+	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+	
+	if (apsInfo) { //apsInfo is not nil
+		
+		NSMutableString *notificationType = [apsInfo objectForKey:@"alert"];
+		
+		NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+		NSString *apnstoken = [defaults stringForKey:@"APNSRegID"];
+		
+	}
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

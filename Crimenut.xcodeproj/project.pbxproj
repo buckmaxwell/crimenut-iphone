@@ -234,7 +234,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9F901B741AB50D4A0083DABC /* Build configuration list for PBXProject "Crime Nut" */;
+			buildConfigurationList = 9F901B741AB50D4A0083DABC /* Build configuration list for PBXProject "Crimenut" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -416,7 +416,7 @@
 				INFOPLIST_FILE = "Crime Nut/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "653e1705-61ab-4a3e-bff1-b63562bb9e8a";
+				PROVISIONING_PROFILE = "35b2f71f-3bb0-4a61-947b-49bfe8bd8b77";
 			};
 			name = Debug;
 		};
@@ -428,7 +428,7 @@
 				INFOPLIST_FILE = "Crime Nut/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "653e1705-61ab-4a3e-bff1-b63562bb9e8a";
+				PROVISIONING_PROFILE = "35b2f71f-3bb0-4a61-947b-49bfe8bd8b77";
 			};
 			name = Release;
 		};
@@ -469,7 +469,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9F901B741AB50D4A0083DABC /* Build configuration list for PBXProject "Crime Nut" */ = {
+		9F901B741AB50D4A0083DABC /* Build configuration list for PBXProject "Crimenut" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F901B9A1AB50D4A0083DABC /* Debug */,

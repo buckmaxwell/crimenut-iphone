@@ -17,7 +17,7 @@
                BlueprintIdentifier = "9F901B781AB50D4A0083DABC"
                BuildableName = "Crime Nut.app"
                BlueprintName = "Crime Nut"
-               ReferencedContainer = "container:Crime Nut.xcodeproj">
+               ReferencedContainer = "container:Crimenut.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "9F901B911AB50D4A0083DABC"
                BuildableName = "Crime NutTests.xctest"
                BlueprintName = "Crime NutTests"
-               ReferencedContainer = "container:Crime Nut.xcodeproj">
+               ReferencedContainer = "container:Crimenut.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,7 +49,7 @@
                BlueprintIdentifier = "9F901B911AB50D4A0083DABC"
                BuildableName = "Crime NutTests.xctest"
                BlueprintName = "Crime NutTests"
-               ReferencedContainer = "container:Crime Nut.xcodeproj">
+               ReferencedContainer = "container:Crimenut.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -59,7 +59,7 @@
             BlueprintIdentifier = "9F901B781AB50D4A0083DABC"
             BuildableName = "Crime Nut.app"
             BlueprintName = "Crime Nut"
-            ReferencedContainer = "container:Crime Nut.xcodeproj">
+            ReferencedContainer = "container:Crimenut.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -72,13 +72,14 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9F901B781AB50D4A0083DABC"
             BuildableName = "Crime Nut.app"
             BlueprintName = "Crime Nut"
-            ReferencedContainer = "container:Crime Nut.xcodeproj">
+            ReferencedContainer = "container:Crimenut.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -90,13 +91,14 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9F901B781AB50D4A0083DABC"
             BuildableName = "Crime Nut.app"
             BlueprintName = "Crime Nut"
-            ReferencedContainer = "container:Crime Nut.xcodeproj">
+            ReferencedContainer = "container:Crimenut.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

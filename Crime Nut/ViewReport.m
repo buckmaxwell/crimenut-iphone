@@ -31,7 +31,14 @@
     // Do any additional setup after loading the view.
     self.descriptionLabel.text = @"";
     [[self mapView] setShowsUserLocation:YES];
+	//NSLog(@"id1%@",reportId);
 
+	//register this view to display on notification
+	///////////////////////////////////
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(applicationEnteredForeground:)
+												 name:UIApplicationWillEnterForegroundNotification
+											   object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,8 +51,8 @@
 
 //get lat, lon, desc, comments
 -(void)viewWillAppear:(BOOL)animated{
-    NSLog(@"id%@",reportId);
-    //call for description & comments
+//    NSLog(@"id%@",reportId);
+	
     //get token
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *tokenfromstorage = [defaults stringForKey:@"token"];
@@ -84,9 +91,6 @@
                                                                            JSONObjectWithData:data
                                                                            options:0
                                                                            error:&error];
-                                       //NSLog(@"err::: %@\n",error);
-                                       //NSLog(@"response::: %@\n",response);
-                                       //NSLog(@"RespDict::: %@\n", responseDictionary);
                                        apiresponse = [responseDictionary objectForKey:@"ERROR"];
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
@@ -100,7 +104,7 @@
                                            NSString *lon = [responseDictionary objectForKey:@"lon"];
                                            NSString *lat = [responseDictionary objectForKey:@"lat"];
                                            CLLocation *loc = [[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]];
-                                           NSLog(@"lat:%@,lon:%@",lat,lon);
+                                           //NSLog(@"lat:%@,lon:%@",lat,lon);
                                            dispatch_async(dispatch_get_main_queue(), ^{
 											   [self showDescription:desc];
                                                NSMutableArray * annotationsToRemove = [ self.mapView.annotations mutableCopy ] ;
@@ -115,7 +119,6 @@
                                                [self.mapView addAnnotation:annotation];
                                                
                                                self.reportComments =  [responseDictionary objectForKey:@"comments"];
-                                               NSLog(@"comments: %@",self.reportComments);
                                                [self getComments];
                                                
                                            });
@@ -134,7 +137,7 @@
                                    });
                                }
                            }];
-    
+	
 }
 
 
@@ -169,7 +172,7 @@
     CGRect newFrame = commentsLabel.frame;
     newFrame.size.height = expectedLabelSize.size.height;
     commentsLabel.frame = newFrame;
-    
+
 }
 
 //set description and resize the box its in
@@ -182,6 +185,7 @@
 	CGRect newFrame = self.descriptionLabel.frame;
 	newFrame.size.height = expectedLabelSize.size.height;
 	self.descriptionLabel.frame = newFrame;
+
 }
 
 
@@ -343,5 +347,19 @@
                            }];
 }
 
+- (void)applicationEnteredForeground:(NSNotification *)notification {
+	NSLog(@"Application Entered Foreground");
+//	//FirstViewController *fvc = (FirstViewController *) viewController.childViewControllers[0];
+//	NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+//	NSString *urlBase = @"http://grosh.co/finnaRoot/index.php";
+//	if ([defaults boolForKey:@"tokenReady"]) {
+//		NSString *token = [defaults stringForKey:@"APNSRegID"];
+//		urlBase = [NSString stringWithFormat:@"http://grosh.co/finnaRoot/index.php?APNSid=%@", token];
+//	}
+//	
+//	NSURL *url = [NSURL URLWithString:urlBase];
+//	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+//	[self.webView loadRequest:requestObj];
+}
 
 @end

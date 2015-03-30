@@ -67,11 +67,6 @@ CLLocationManager *locationManager;
     return pickerData.count;
 }
 
-// The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return pickerData[row];
-}
 
 - (IBAction)postButtonTapped:(id)sender {
     
@@ -208,4 +203,11 @@ CLLocationManager *locationManager;
     [theAlert show];
 }
 
+// The data to return for the row and component (column) that's being passed in
+- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+	NSString *title = pickerData[row];
+	NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+	return attString;
+}
 @end
