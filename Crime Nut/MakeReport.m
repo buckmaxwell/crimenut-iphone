@@ -16,9 +16,8 @@
 
 @implementation MakeReport
 
-@synthesize titleTextField;
 @synthesize whereTextField;
-@synthesize whenTextField;
+@synthesize timePicker;
 @synthesize subjectPicker;
 @synthesize descriptionTextField;
 
@@ -70,9 +69,8 @@ CLLocationManager *locationManager;
 
 - (IBAction)postButtonTapped:(id)sender {
     
-    NSString *title =titleTextField.text;
     NSString *where = whereTextField.text;
-    //NSString *when = whenTextField.text;
+    NSDate *time = [timePicker date];
     NSString *what = [subjectCodes objectAtIndex:[subjectPicker selectedRowInComponent:0]];
     NSString *desc = descriptionTextField.text;
     if( [what isEqualToString:@""] || [desc isEqualToString:@""] || [where isEqualToString:@""] ){
@@ -90,14 +88,19 @@ CLLocationManager *locationManager;
     // URL of the endpoint we're going to contact.
     NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/new"];    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
+	NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+	[DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+	NSLog(@"%@",[NSString stringWithFormat:@"%@",[DateFormatter stringFromDate:time]]);
     NSArray *empty = @[];
+	
+	
     // Create a simple dictionary with shit to create a report.
     NSDictionary *dictionary = @{
                                  @"token":tokenfromstorage,
-                                 @"title":title,
                                  @"subjectcode":what,
                                  @"address_line1":where,
+								 @"time_began":[DateFormatter stringFromDate:time],
+								 @"time_ended":[DateFormatter stringFromDate:time],
                                  @"lat_reported_from":latitude.stringValue,
                                  @"lon_reported_from":longitude.stringValue,
                                  @"description":desc,
@@ -207,7 +210,9 @@ CLLocationManager *locationManager;
 - (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
 	NSString *title = pickerData[row];
-	NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+	NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
 	return attString;
 }
+
+
 @end

@@ -137,6 +137,7 @@ CLLocationManager *locationManager;
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            //TODO: alert user somehow of error?
+										   [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
                                        }else{
                                            NSIndexPath *myIndex = [NSIndexPath indexPathForRow:self.reportPosts.count inSection:0] ;
                                            if(self.reportPosts.count == 0){
@@ -220,7 +221,7 @@ CLLocationManager *locationManager;
     dispatch_async(dispatch_get_main_queue(), ^{
         // Update the UI
 
-        NSString *title = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"title"];
+        NSString *desc = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"description"];
         NSString *subject = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
         NSString *time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_began"];
         
@@ -235,14 +236,18 @@ CLLocationManager *locationManager;
         
         if([time isEqualToString:@"None"]){ time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_reported"];}
         if([time isEqualToString:@"None"]){ time = @"";}else{
-        
-            NSRange range = [time rangeOfString:@"."];
-            time = [time substringWithRange:NSMakeRange(0, range.location)];
-            
+			
+			if ([time rangeOfString:@"."].location != NSNotFound) {
+				NSRange range = [time rangeOfString:@"."];
+				time = [time substringWithRange:NSMakeRange(0, range.location)];
+			}
+
+			
+			
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
             NSDate *myDate = [dateFormatter dateFromString:time];
-            
+			
             NSString *timeago = [myDate formattedAsTimeAgo];
             time = timeago;
         }
@@ -254,11 +259,21 @@ CLLocationManager *locationManager;
         
         NSString *location = [NSString stringWithFormat:@"%@%@%@%@",housNum,streetPrefix,street,streetSuffix];
 
-        cell.locationLabel.text = location;
+        cell.descLabel.text = desc;
         cell.timeLabel.text = time;
-        cell.titleLabel.text = title;
-        cell.subtitleLabel.text = subject;
-        
+        cell.titleLabel.text = subject;
+        cell.subtitleLabel.text = location;
+		
+//		cell.descLabel.numberOfLines = 0;
+//		[cell.descLabel setPreferredMaxLayoutWidth:372];
+//		CGSize maxSize = CGSizeMake(372, 410);
+//		CGRect expectedLabelSize = [desc boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.descLabel.font} context:Nil];
+//		CGRect newFrame = cell.descLabel.frame;
+//		newFrame.size.height = expectedLabelSize.size.height;
+//		NSLog(@"%f", newFrame.size.height);
+//		cell.descLabel.frame = newFrame;
+		
+		
         if(!self.endOfFeed){
             if (indexPath.row == [self.reportPosts count] - 1)
             {
@@ -287,9 +302,11 @@ CLLocationManager *locationManager;
     if([time isEqualToString:@"None"]){ time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_reported"];}
     if([time isEqualToString:@"None"]){ time = @"";}else{
         
-        NSRange range = [time rangeOfString:@"."];
-        time = [time substringWithRange:NSMakeRange(0, range.location)];
-        
+		if ([time rangeOfString:@"."].location != NSNotFound) {
+			NSRange range = [time rangeOfString:@"."];
+			time = [time substringWithRange:NSMakeRange(0, range.location)];
+		}
+		
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
         NSDate *myDate = [dateFormatter dateFromString:time];
@@ -297,7 +314,12 @@ CLLocationManager *locationManager;
         NSString *timeago = [myDate formattedAsTimeAgo];
         time = timeago;
     }
-    
+	NSString *subject = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
+	
+	if ([subject rangeOfString:@"Burglary"].location != NSNotFound) {
+		subject = @"Burglary";
+	}
+	
     NSString *housNum = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"house_number"]];
     NSString *streetPrefix = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street_prefix"]];
     NSString *street = [NSString stringWithFormat:@"%@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street"]];
@@ -309,9 +331,8 @@ CLLocationManager *locationManager;
     
     NSString *location = [NSString stringWithFormat:@"%@%@%@%@",housNum,streetPrefix,street,streetSuffix];
 
-    self.ViewReport.titleLabel.text = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"title"];
     self.ViewReport.timeStampLabel.text = time;
-    self.ViewReport.subjectLabel.text =[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
+    self.ViewReport.subjectLabel.text = subject;
     self.ViewReport.locationLabel.text = location;
     self.ViewReport.reportId = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"id"];
     self.ViewReport.descriptionLabel.text = @"";

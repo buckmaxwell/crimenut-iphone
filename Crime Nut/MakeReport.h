@@ -11,11 +11,10 @@
 
 @interface MakeReport : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UITextField *titleTextField;
 @property (strong, nonatomic) IBOutlet UITextField *whereTextField;
-@property (strong, nonatomic) IBOutlet UITextField *whenTextField;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionTextField;
 @property (strong, nonatomic) IBOutlet UIPickerView *subjectPicker;
+@property (strong, nonatomic) IBOutlet UIDatePicker *timePicker;
 - (IBAction)postButtonTapped:(id)sender;
 
 

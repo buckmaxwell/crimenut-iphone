@@ -111,7 +111,7 @@
                                                [ annotationsToRemove removeObject:self.mapView.userLocation ] ;
                                                [ self.mapView removeAnnotations:annotationsToRemove ] ;
                                                // zoom the map into the users current location
-                                               MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(loc.coordinate, 2*METERS_MILE, 2*METERS_MILE);
+                                               MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(loc.coordinate, METERS_MILE, METERS_MILE);
                                                [[self mapView] setRegion:viewRegion animated:YES];
 
                                                MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
@@ -160,14 +160,14 @@
     NSString *comment = @"";
     commentsLabel.numberOfLines = 0;
     for (int i = 0; i < self.reportComments.count; i++) {
-        comment = [NSString stringWithFormat:@"%@\n%@\n",
+        comment = [NSString stringWithFormat:@"%@\n%@\n ",
                    comment,
                    [[self.reportComments objectAtIndex:i] objectForKey:@"content"]];
     }
     commentsLabel.text = comment;
    
     [commentsLabel setPreferredMaxLayoutWidth:360];
-    CGSize maxSize = CGSizeMake(360, 410);
+    CGSize maxSize = CGSizeMake(360, 810);
     CGRect expectedLabelSize = [comment boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:commentsLabel.font} context:Nil];
     CGRect newFrame = commentsLabel.frame;
     newFrame.size.height = expectedLabelSize.size.height;
@@ -177,10 +177,10 @@
 
 //set description and resize the box its in
 -(void)showDescription:(NSString *)description{
-	self.descriptionLabel.text = description;
+	self.descriptionLabel.text = [NSString stringWithFormat:@"\n%@\n\n ",description];
 	self.descriptionLabel.numberOfLines = 0;
 	[self.descriptionLabel setPreferredMaxLayoutWidth:360];
-	CGSize maxSize = CGSizeMake(360, 410);
+	CGSize maxSize = CGSizeMake(360, 910);
 	CGRect expectedLabelSize = [description boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.descriptionLabel.font} context:Nil];
 	CGRect newFrame = self.descriptionLabel.frame;
 	newFrame.size.height = expectedLabelSize.size.height;
@@ -240,7 +240,7 @@
                                            if (apiresponse) {
                                                NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                   [self showAlert:@"Something went amiss" withMessage:apiresponse];
+                                                   [self showAlert:@"Something went amiss" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
                                                });
                                                
                                            }else{
@@ -329,7 +329,16 @@
                                        }else{
                                            dispatch_async(dispatch_get_main_queue(), ^{
                                                [self showAlert:@"We've posted your comment" withMessage:@"Thanks for being a Crime Kid!"];
-                                               [self.commentTextField setUserInteractionEnabled:FALSE];
+											   
+											   self.commentsLabel.text = [NSString stringWithFormat:@"%@\n%@\n ",self.commentsLabel.text,comment];
+											   [commentsLabel setPreferredMaxLayoutWidth:360];
+											   CGSize maxSize = CGSizeMake(360, 810);
+											   CGRect expectedLabelSize = [comment boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:commentsLabel.font} context:Nil];
+											   CGRect newFrame = commentsLabel.frame;
+											   newFrame.size.height = expectedLabelSize.size.height;
+											   commentsLabel.frame = newFrame;
+											   self.commentTextField.text = @"";
+
                                            });
                                        }
                                    }else{

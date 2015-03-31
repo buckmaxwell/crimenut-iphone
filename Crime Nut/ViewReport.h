@@ -13,7 +13,6 @@
 @interface ViewReport : UIViewController<UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *timeStampLabel;
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *locationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *subjectLabel;
