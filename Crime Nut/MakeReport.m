@@ -148,7 +148,7 @@ CLLocationManager *locationManager;
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            //alert user somehow of error?
                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                              [self showAlert:@"We encountered a problem" withMessage:apiresponse];
+                                              [self showAlert:@"We encountered a problem" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
                                           });
                                        }else{
                                            //get and store token

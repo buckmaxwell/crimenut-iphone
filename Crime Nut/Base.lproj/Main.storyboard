@@ -37,8 +37,7 @@
                                                     <exclude reference="da7-Wp-sqq"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="20" y="18" width="280" height="21"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <exclude reference="IWk-zS-LI0"/>
                                                     <exclude reference="da7-Wp-sqq"/>
@@ -63,18 +62,12 @@
                                                     <include reference="G9H-Wk-fKw"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="296" y="19" width="84" height="15"/>
-                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="749" verticalHuggingPriority="748" horizontalCompressionResistancePriority="749" text="desc" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uB-09-kdv">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="20" y="73" width="372" height="19"/>
-                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="aEQ-rO-xj1">
                                             <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -91,8 +84,7 @@
                                                     <exclude reference="faS-2R-mYj"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="20" y="47" width="280" height="18"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="ZJ7-4J-eOJ"/>
                                                     <exclude reference="faS-2R-mYj"/>
@@ -122,16 +114,16 @@
                                             <exclude reference="aEQ-rO-xj1"/>
                                         </mask>
                                         <mask key="constraints">
+                                            <exclude reference="91A-Hp-fB6"/>
+                                            <exclude reference="itM-Pf-7tZ"/>
+                                            <exclude reference="kAS-pv-wSf"/>
+                                            <exclude reference="lzr-Fu-G0R"/>
                                             <exclude reference="CUR-4V-TFE"/>
                                             <exclude reference="JPq-Lt-ewe"/>
                                             <exclude reference="iHK-58-KRK"/>
                                             <exclude reference="8q1-LU-vl3"/>
                                             <exclude reference="q7v-CI-6E6"/>
                                             <exclude reference="wEg-To-kd6"/>
-                                            <exclude reference="91A-Hp-fB6"/>
-                                            <exclude reference="itM-Pf-7tZ"/>
-                                            <exclude reference="kAS-pv-wSf"/>
-                                            <exclude reference="lzr-Fu-G0R"/>
                                             <exclude reference="gzF-n0-UI6"/>
                                             <exclude reference="pzW-He-MnA"/>
                                         </mask>
@@ -150,16 +142,16 @@
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="constraints">
+                                            <include reference="91A-Hp-fB6"/>
+                                            <include reference="itM-Pf-7tZ"/>
+                                            <include reference="kAS-pv-wSf"/>
+                                            <include reference="lzr-Fu-G0R"/>
                                             <include reference="CUR-4V-TFE"/>
                                             <include reference="JPq-Lt-ewe"/>
                                             <include reference="iHK-58-KRK"/>
                                             <include reference="8q1-LU-vl3"/>
                                             <include reference="q7v-CI-6E6"/>
                                             <include reference="wEg-To-kd6"/>
-                                            <include reference="91A-Hp-fB6"/>
-                                            <include reference="itM-Pf-7tZ"/>
-                                            <include reference="kAS-pv-wSf"/>
-                                            <include reference="lzr-Fu-G0R"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -1350,7 +1342,6 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
-                                <variation key="heightClass=regular-widthClass=compact"/>
                                 <connections>
                                     <segue destination="S7z-Ne-MRQ" kind="show" id="wF1-0w-hpT"/>
                                 </connections>
@@ -1511,7 +1502,7 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MSu-8T-AhG">
                                 <rect key="frame" x="16" y="192" width="568" height="30"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Already a Crime Nut?">
+                                <state key="normal" title="Already a Crimenut?">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1680,7 +1671,7 @@
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bDM-Kr-IGv">
                                 <rect key="frame" x="16" y="200" width="568" height="30"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Not a Crime Nut yet?">
+                                <state key="normal" title="Not a Crimenut yet?">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>

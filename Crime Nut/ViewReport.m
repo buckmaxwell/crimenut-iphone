@@ -295,7 +295,6 @@
     
     // Create a simple dictionary with numbers.
     NSDictionary *dictionary = @{@"report_id":self.reportId, @"token":tokenfromstorage,@"content":comment};
-    NSLog(@"reportID: %@",self.reportId);
     // Convert the dictionary into JSON data.
     NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
                                                        options:0
@@ -331,7 +330,7 @@
                                            
                                        }else{
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self showAlert:@"We've posted your comment" withMessage:@"Thanks for being a Crime Kid!"];
+                                               [self showAlert:@"We've posted your comment" withMessage:@"Thanks for being a Crimenut!"];
 											   
 											   self.commentsLabel.text = [NSString stringWithFormat:@"%@\n%@\n ",self.commentsLabel.text,comment];
 											   [commentsLabel setPreferredMaxLayoutWidth:360];
@@ -361,17 +360,6 @@
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {
 	NSLog(@"Application Entered Foreground");
-//	//FirstViewController *fvc = (FirstViewController *) viewController.childViewControllers[0];
-//	NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
-//	NSString *urlBase = @"http://grosh.co/finnaRoot/index.php";
-//	if ([defaults boolForKey:@"tokenReady"]) {
-//		NSString *token = [defaults stringForKey:@"APNSRegID"];
-//		urlBase = [NSString stringWithFormat:@"http://grosh.co/finnaRoot/index.php?APNSid=%@", token];
-//	}
-//	
-//	NSURL *url = [NSURL URLWithString:urlBase];
-//	NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-//	[self.webView loadRequest:requestObj];
 }
 
 @end
