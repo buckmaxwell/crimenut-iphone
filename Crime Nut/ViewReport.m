@@ -155,6 +155,20 @@
 }
 
 
+//resize the title
+-(void)showTitle:(NSString *)title{
+//	self.subjectLabel.text = [NSString stringWithFormat:@"\n%@\n\n ",description];
+	self.subjectLabel.numberOfLines = 0;
+	[self.subjectLabel setPreferredMaxLayoutWidth:360];
+	CGSize maxSize = CGSizeMake(360, 910);
+	CGRect expectedLabelSize = [self.subjectLabel.text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.subjectLabel.font} context:Nil];
+	CGRect newFrame = self.subjectLabel.frame;
+	newFrame.size.height = expectedLabelSize.size.height;
+	
+	self.subjectLabel.frame = newFrame;
+	
+}
+
 //get comments and resize the box they sit in
 - (void) getComments{
     NSString *comment = @"";
@@ -177,15 +191,7 @@
 
 //set description and resize the box its in
 -(void)showDescription:(NSString *)description{
-	self.descriptionLabel.text = [NSString stringWithFormat:@"\n%@\n\n ",description];
-	self.descriptionLabel.numberOfLines = 0;
-	[self.descriptionLabel setPreferredMaxLayoutWidth:360];
-	CGSize maxSize = CGSizeMake(360, 910);
-	CGRect expectedLabelSize = [description boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.descriptionLabel.font} context:Nil];
-	CGRect newFrame = self.descriptionLabel.frame;
-	newFrame.size.height = expectedLabelSize.size.height;
-	self.descriptionLabel.frame = newFrame;
-
+	self.descriptionLabel.text = [NSString stringWithFormat:@"\n%@\n",description];
 }
 
 
@@ -316,14 +322,11 @@
                                                                            JSONObjectWithData:data
                                                                            options:0
                                                                            error:&error];
-                                       //NSLog(@"err::: %@\n",error);
-                                       //NSLog(@"response::: %@\n",response);
-                                       //NSLog(@"RespDict::: %@\n", responseDictionary);
                                        apiresponse = [responseDictionary objectForKey:@"ERROR"];
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self showAlert:@"Something went amiss" withMessage:apiresponse];
+                                               [self showAlert:@"Something went amiss" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
                                            });
                                            
                                        }else{

@@ -36,6 +36,8 @@ CLLocationManager *locationManager;
         Login *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"Login"];
         [self presentViewController:controller animated:YES completion:nil];
     }else{
+		UIBarButtonItem * item = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CrimeNutLogo_034"]]];
+		self.navigationItem.leftBarButtonItem = item;
         self.endOfFeed = NO;
         [self.tableView setDataSource:self];
         [self.tableView setDelegate:self];
@@ -175,14 +177,6 @@ CLLocationManager *locationManager;
 }
 
 
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    double percentScrolled = scrollView.contentOffset.y / scrollView.frame.size.height;
-//    if(percentScrolled > 0.62){
-//       NSLog(@"%@", @"halfway!!");
-//    }
-//}
-
-
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [locationManager stopUpdatingLocation];
@@ -210,81 +204,78 @@ CLLocationManager *locationManager;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //NSLog(@"height: %f\n", UITableViewAutomaticDimension);
-    return 100;
+	return 140;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+	
     FeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FeedCell" forIndexPath:indexPath];
-    // Configure the cell...
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // Update the UI
-
-        NSString *desc = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"description"];
-        NSString *subject = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
-        NSString *time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_began"];
-        
-        NSString *housNum = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"house_number"]];
-        NSString *streetPrefix = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street_prefix"]];
-        NSString *street = [NSString stringWithFormat:@"%@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street"]];
-        NSString *streetSuffix = [NSString stringWithFormat:@" %@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street_suffix"]];
-        if([housNum isEqualToString:@"None "]){ housNum = @"";}
-        if([streetPrefix isEqualToString:@"None "]){ streetPrefix = @"";}
-        if([street isEqualToString:@"None"]){ street = @"";}
-        if([streetSuffix isEqualToString:@" None"]){ streetSuffix = @"";}
-        
-        if([time isEqualToString:@"None"]){ time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_reported"];}
-        if([time isEqualToString:@"None"]){ time = @"";}else{
-			
-			if ([time rangeOfString:@"."].location != NSNotFound) {
-				NSRange range = [time rangeOfString:@"."];
-				time = [time substringWithRange:NSMakeRange(0, range.location)];
-			}
-
-			
-			
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-            NSDate *myDate = [dateFormatter dateFromString:time];
-			
-            NSString *timeago = [myDate formattedAsTimeAgo];
-            time = timeago;
-        }
-        
-        if ([subject rangeOfString:@"Burglary"].location != NSNotFound) {
-            subject = @"Burglary";
-        }
-        
-        
-        NSString *location = [NSString stringWithFormat:@"%@%@%@%@",housNum,streetPrefix,street,streetSuffix];
-
-        cell.descLabel.text = desc;
-        cell.timeLabel.text = time;
-        cell.titleLabel.text = subject;
-        cell.subtitleLabel.text = location;
+	
+	// Configure the cell...
+	dispatch_async(dispatch_get_main_queue(), ^{
+	// Update the UI
+	
+	NSString *desc = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"description"];
+	NSString *time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_began"];
+	NSString *subject = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"subject"];
+	
+	NSRange lastDashRange = [subject rangeOfString:@"-" options:NSBackwardsSearch];
+	if(lastDashRange.location != NSNotFound){
+		subject = [subject substringToIndex:lastDashRange.location];
+	}
+	
+	NSString *housNum = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"house_number"]];
+	NSString *streetPrefix = [NSString stringWithFormat:@"%@ ",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street_prefix"]];
+	NSString *street = [NSString stringWithFormat:@"%@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street"]];
+	NSString *streetSuffix = [NSString stringWithFormat:@" %@",[[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"street_suffix"]];
+	if([housNum isEqualToString:@"None "]){ housNum = @"";}
+	if([streetPrefix isEqualToString:@"None "]){ streetPrefix = @"";}
+	if([street isEqualToString:@"None"]){ street = @"";}
+	if([streetSuffix isEqualToString:@" None"]){ streetSuffix = @"";}
+	
+	if([time isEqualToString:@"None"]){ time = [[self.reportPosts objectAtIndex:[indexPath row]] objectForKey:@"time_reported"];}
+	if([time isEqualToString:@"None"]){ time = @"";}else{
 		
-//		cell.descLabel.numberOfLines = 0;
-//		[cell.descLabel setPreferredMaxLayoutWidth:372];
-//		CGSize maxSize = CGSizeMake(372, 410);
-//		CGRect expectedLabelSize = [desc boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:cell.descLabel.font} context:Nil];
-//		CGRect newFrame = cell.descLabel.frame;
-//		newFrame.size.height = expectedLabelSize.size.height;
-//		NSLog(@"%f", newFrame.size.height);
-//		cell.descLabel.frame = newFrame;
+		if ([time rangeOfString:@"."].location != NSNotFound) {
+			NSRange range = [time rangeOfString:@"."];
+			time = [time substringWithRange:NSMakeRange(0, range.location)];
+		}
 		
 		
-        if(!self.endOfFeed){
-            if (indexPath.row == [self.reportPosts count] - 1)
-            {
-                NSNumber *nextpage = [NSNumber numberWithInt:[self.currentPage intValue] + 1];
-                [self getFeed:nextpage];
-                NSLog(@"call was made");
-            }
-        }
-    });
+		
+		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+		NSDate *myDate = [dateFormatter dateFromString:time];
+		
+		NSString *timeago = [myDate formattedAsTimeAgo];
+		time = timeago;
+	}
+	
+	if ([subject rangeOfString:@"Burglary"].location != NSNotFound) {
+		subject = @"Burglary";
+	}
+	
+	
+	NSString *location = [NSString stringWithFormat:@"%@%@%@%@",housNum,streetPrefix,street,streetSuffix];
+	
+	cell.descLabel.text = desc;
+	cell.timeLabel.text = time;
+	cell.titleLabel.text = subject;
+	cell.subtitleLabel.text = location;
+	
+	
+	if(!self.endOfFeed){
+		if (indexPath.row == [self.reportPosts count] - 1)
+		{
+			NSNumber *nextpage = [NSNumber numberWithInt:[self.currentPage intValue] + 1];
+			[self getFeed:nextpage];
+			NSLog(@"call was made");
+		}
+	}
+	});
+	return cell;
 
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

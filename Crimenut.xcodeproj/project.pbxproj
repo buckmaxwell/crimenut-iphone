@@ -24,6 +24,7 @@
 		9F901BA41AB50F3A0083DABC /* Signup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901BA31AB50F3A0083DABC /* Signup.m */; };
 		9FA586201ABFBDB500333713 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA5861F1ABFBDB500333713 /* TPKeyboardAvoidingScrollView.m */; };
 		9FA586231ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA586221ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		9FB0278E1AD05AE200629E20 /* CrimeNutLogo_034.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9FB0278D1AD05AE200629E20 /* CrimeNutLogo_034.gif */; };
 		9FE53BFD1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */; };
 		9FE53BFF1ABE273A0074F1D5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE53BFE1ABE273A0074F1D5 /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		9FA5861F1ABFBDB500333713 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		9FA586211ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		9FA586221ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		9FB0278D1AD05AE200629E20 /* CrimeNutLogo_034.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = CrimeNutLogo_034.gif; path = "../../../Crimenut resources/CrimeNutLogo_034.gif"; sourceTree = "<group>"; };
 		9FE53BFB1ABDBF600074F1D5 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
 		9FE53BFE1ABE273A0074F1D5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -146,6 +148,7 @@
 				9F569B021AB66417000DDA34 /* Login.m */,
 				9F901B891AB50D4A0083DABC /* Images.xcassets */,
 				9F901B8B1AB50D4A0083DABC /* LaunchScreen.xib */,
+				9FB0278D1AD05AE200629E20 /* CrimeNutLogo_034.gif */,
 				9F901B7C1AB50D4A0083DABC /* Supporting Files */,
 			);
 			path = "Crime Nut";
@@ -260,6 +263,7 @@
 			files = (
 				9F901B881AB50D4A0083DABC /* Main.storyboard in Resources */,
 				9F901B8D1AB50D4A0083DABC /* LaunchScreen.xib in Resources */,
+				9FB0278E1AD05AE200629E20 /* CrimeNutLogo_034.gif in Resources */,
 				9F901B8A1AB50D4A0083DABC /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

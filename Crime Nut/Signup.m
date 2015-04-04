@@ -87,16 +87,16 @@
                                                                            JSONObjectWithData:data
                                                                            options:0
                                                                            error:&error];
-                                       NSLog(@"err::: %@\n",error);
-                                       NSLog(@"response::: %@\n",response);
-                                       NSLog(@"RespDict::: %@\n", responseDictionary);
+//                                       NSLog(@"err::: %@\n",error);
+//                                       NSLog(@"response::: %@\n",response);
+//                                       NSLog(@"RespDict::: %@\n", responseDictionary);
                                        apiresponse = [responseDictionary objectForKey:@"ERROR"];
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            //alert user somehow of error?
                                            
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self showAlert:@"We encountered a problem" withMessage:apiresponse];
+                                               [self showAlert:@"We encountered a problem" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
                                            });
                                        }else{
                                            //get and store token
