@@ -13,8 +13,8 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *whereTextField;
 @property (strong, nonatomic) IBOutlet UITextView *descriptionTextField;
-@property (strong, nonatomic) IBOutlet UIPickerView *subjectPicker;
-@property (strong, nonatomic) IBOutlet UIDatePicker *timePicker;
+@property (strong, nonatomic) IBOutlet UIButton *dateButton;
+@property (strong, nonatomic) IBOutlet UILabel *subjectLabel;
 - (IBAction)postButtonTapped:(id)sender;
 
 

@@ -17,9 +17,10 @@
 @implementation MakeReport
 
 @synthesize whereTextField;
-@synthesize timePicker;
-@synthesize subjectPicker;
+@synthesize subjectLabel;
 @synthesize descriptionTextField;
+@synthesize dateButton;
+
 
 CLLocationManager *locationManager;
 
@@ -41,8 +42,8 @@ CLLocationManager *locationManager;
     }
     pickerData = @[@"Theft", @"Property Damage", @"Burglary",@"Assault",@"Menacing", @"Vandalism",@"Robbery",@"Other"];
     subjectCodes = @[@"115",          @"551",                   @"6969",          @"254",           @"255",       @"554",        @"450",        @"0000"];
-    subjectPicker.dataSource = self;
-    subjectPicker.delegate = self;
+
+	[self updateDateLabel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,7 +52,13 @@ CLLocationManager *locationManager;
 }
 
 
-
+-(void)updateDateLabel{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = @"MM/dd/yyyy hh:mma";
+	NSString *date = [formatter stringFromDate:[NSDate date]];
+	dateButton.titleLabel.text = date;
+	[dateButton setTitle:date forState:UIControlStateNormal];
+}
 
 
 // The number of columns of data
@@ -67,12 +74,16 @@ CLLocationManager *locationManager;
 }
 
 
+
+
 - (IBAction)postButtonTapped:(id)sender {
     
     NSString *where = whereTextField.text;
-    NSDate *time = [timePicker date];
-    NSString *what = [subjectCodes objectAtIndex:[subjectPicker selectedRowInComponent:0]];
+    NSString *time = dateButton.titleLabel.text;
+	NSString *what = subjectLabel.text;
     NSString *desc = descriptionTextField.text;
+	
+	
     if( [what isEqualToString:@""] || [desc isEqualToString:@""] || [where isEqualToString:@""] ){
         [self showAlert:@"Hmmmm..." withMessage:@"Some report information is mising"];
         return;
@@ -88,9 +99,6 @@ CLLocationManager *locationManager;
     // URL of the endpoint we're going to contact.
     NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/new"];    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-	NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-	[DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-	NSLog(@"%@",[NSString stringWithFormat:@"%@",[DateFormatter stringFromDate:time]]);
     NSArray *empty = @[];
 	
 	
@@ -99,16 +107,16 @@ CLLocationManager *locationManager;
                                  @"token":tokenfromstorage,
                                  @"subjectcode":what,
                                  @"address_line1":where,
-								 @"time_began":[DateFormatter stringFromDate:time],
-								 @"time_ended":[DateFormatter stringFromDate:time],
+								 @"time_began": time,
+								 @"time_ended":time,
                                  @"lat_reported_from":latitude.stringValue,
                                  @"lon_reported_from":longitude.stringValue,
                                  @"description":desc,
                                  @"offenses":empty,
                                  @"perpetrators":empty,
-                                 @"property":empty};
-    //NSLog(@"%@ ~ LAT:%@ ~LONG:%@\n", where,latitude.stringValue,longitude.stringValue);
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                 @"property":empty
+							};
+
     // Convert the dictionary into JSON data.
     NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
                                                        options:0
@@ -197,6 +205,10 @@ CLLocationManager *locationManager;
     [locationManager stopUpdatingLocation];
 }
 
+
+
+
+
 -(void)showAlert:(NSString *)title withMessage:(NSString *)message{
     UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:title
                                                        message:message
@@ -206,12 +218,68 @@ CLLocationManager *locationManager;
     [theAlert show];
 }
 
-// The data to return for the row and component (column) that's being passed in
-- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-	NSString *title = pickerData[row];
-	NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-	return attString;
+
+
+- (void)changeDate:(UIDatePicker *)sender {
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	formatter.dateFormat = @"MM/dd/yyyy hh:mma";
+	NSString *date = [formatter stringFromDate:sender.date];
+	dateButton.titleLabel.text = date;
+	[dateButton setTitle:date forState:UIControlStateNormal];
+}
+
+- (void)removeViews:(id)object {
+	[[self.view viewWithTag:9] removeFromSuperview];
+	[[self.view viewWithTag:10] removeFromSuperview];
+	[[self.view viewWithTag:11] removeFromSuperview];
+}
+
+- (void)dismissDatePicker:(id)sender {
+	CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height, 320, 44);
+	CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height+44, 320, 216);
+	[UIView beginAnimations:@"MoveOut" context:nil];
+	[self.view viewWithTag:9].alpha = 0;
+	[self.view viewWithTag:10].frame = datePickerTargetFrame;
+	[self.view viewWithTag:11].frame = toolbarTargetFrame;
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(removeViews:)];
+	[UIView commitAnimations];
+}
+
+- (IBAction)callDP:(id)sender {
+	if ([self.view viewWithTag:9]) {
+		return;
+	}
+	CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height-216-44, 320, 44);
+	CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height-216, 320, 216);
+	
+	UIView *darkView = [[UIView alloc] initWithFrame:self.view.bounds];
+	darkView.alpha = 0;
+	darkView.backgroundColor = [UIColor blackColor];
+	darkView.tag = 9;
+	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissDatePicker:)];
+	[darkView addGestureRecognizer:tapGesture];
+	[self.view addSubview:darkView];
+	
+	UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height+44, 320, 216)];
+	datePicker.tag = 10;
+	datePicker.backgroundColor = [UIColor whiteColor];
+	[datePicker addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
+	[self.view addSubview:datePicker];
+	
+	UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, 44)];
+	toolBar.tag = 11;
+	toolBar.barStyle = UIBarStyleDefault;
+	UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissDatePicker:)];
+	[toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, nil]];
+	[self.view addSubview:toolBar];
+	
+	[UIView beginAnimations:@"MoveIn" context:nil];
+	toolBar.frame = toolbarTargetFrame;
+	datePicker.frame = datePickerTargetFrame;
+	darkView.alpha = 0.9;
+	[UIView commitAnimations];
 }
 
 
