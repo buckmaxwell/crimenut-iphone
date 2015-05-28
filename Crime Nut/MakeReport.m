@@ -272,6 +272,7 @@ CLLocationManager *locationManager;
 	toolBar.barStyle = UIBarStyleDefault;
 	UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 	UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissDatePicker:)];
+	doneButton.tintColor = [UIColor blackColor];
 	[toolBar setItems:[NSArray arrayWithObjects:spacer, doneButton, nil]];
 	[self.view addSubview:toolBar];
 	
