@@ -132,10 +132,7 @@ CLLocationManager *locationManager;
                                                                            JSONObjectWithData:data
                                                                            options:0
                                                                            error:&error];
-                                       //NSLog(@"err::: %@\n",error);
-                                       //NSLog(@"response::: %@\n",response);
-                                       //NSLog(@"RespDict::: %@\n", responseDictionary);
-                                       apiresponse = [responseDictionary objectForKey:@"ERROR"];
+					apiresponse = [responseDictionary objectForKey:@"ERROR"];
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            //TODO: alert user somehow of error?
