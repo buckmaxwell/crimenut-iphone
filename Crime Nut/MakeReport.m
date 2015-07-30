@@ -10,10 +10,16 @@
 #import "CrimeFeed.h"
 #import "BasicModel.h"
 #import "OffensesTableViewController.h"
+#import "Property.h"
+
+
 
 @interface MakeReport () <CLLocationManagerDelegate>
 @property NSArray *pickerData;
 @property NSArray *subjectCodes;
+@property NSString *chosenSubjectCode;
+@property NSMutableArray *propertyList;
+@property NSMutableArray *perpList;
 @end
 
 @implementation MakeReport
@@ -33,10 +39,20 @@ CLLocationManager *locationManager;
 	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 	[self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
 	self.navigationItem.title = @"Report an Incident";
+	
 	UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickOffense)];
 	self.subjectLabel.text = @"Choose Offense ->";
 	[self.subjectLabel setUserInteractionEnabled:YES];
 	[self.subjectLabel addGestureRecognizer:singleTap];
+	
+	UITapGestureRecognizer *singleTap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(describeProperty)];
+	[self.propertyLabel setUserInteractionEnabled:YES];
+	[self.propertyLabel addGestureRecognizer:singleTap2];
+	
+	UITapGestureRecognizer *singleTap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(describePerp)];
+	[self.perpLabel setUserInteractionEnabled:YES];
+	[self.perpLabel addGestureRecognizer:singleTap3];
+	
 	if ([CLLocationManager locationServicesEnabled]) {
 		locationManager = [[CLLocationManager alloc] init];
 		locationManager.delegate = self;
@@ -51,7 +67,8 @@ CLLocationManager *locationManager;
 	}
 	self.pickerData = @[@"Theft", @"Property Damage", @"Burglary",@"Assault",@"Menacing", @"Vandalism",@"Robbery",@"Other"];
 	self.subjectCodes = @[@"115",          @"551",                   @"6969",          @"254",           @"255",       @"554",        @"450",        @"0000"];
-	
+	self.propertyList = [NSMutableArray new];
+	self.perpList = [NSMutableArray new];
 	[self updateDateLabel];
 }
 
@@ -74,9 +91,39 @@ CLLocationManager *locationManager;
 	OffensesTableViewController *otvc = [self.storyboard instantiateViewControllerWithIdentifier:@"OffensesTableViewController"];
 	otvc.offenses = self.pickerData;
 	otvc.subjectCodes = self.subjectCodes;
+	otvc.delegate = self;
 	[self.navigationController pushViewController:otvc animated:YES];
 }
 
+- (void)pickedOffense:(NSString *)offense withSubjectCode:(NSString *)code{
+	self.subjectLabel.text = offense;
+	self.chosenSubjectCode = code;
+}
+
+
+-(void)describeProperty{
+	PropertyDescriptionViewController *pdvc = [self.storyboard instantiateViewControllerWithIdentifier:@"PropertyDescriptionViewController"];
+	pdvc.delegate = self;
+	[self.navigationController pushViewController:pdvc animated:YES];
+}
+
+- (void)finishedProperty:(Property *)property{
+	[self.propertyList addObject:property];
+	self.propertyLabel.text = [NSString stringWithFormat:@"%lu piece of property cited", (unsigned long)self.propertyList.count];
+}
+
+
+
+-(void)describePerp{
+	PerpatratorDescriptionViewController *pdvc = [self.storyboard instantiateViewControllerWithIdentifier:@"PerpatratorDescriptionViewController"];
+	pdvc.delegate = self;
+	[self.navigationController pushViewController:pdvc animated:YES];
+}
+
+- (void)finishedPerp:(Perpatrator *)perp{
+	[self.perpList addObject:perp];
+	self.perpLabel.text = [NSString stringWithFormat:@"%lu suspect cited", (unsigned long)self.perpList.count];
+}
 
 // The number of columns of data
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView

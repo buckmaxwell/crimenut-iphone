@@ -11,5 +11,6 @@
 @interface OffensesTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *offenseLabel;
+@property (strong, nonatomic) NSString *subjectCode;
 
 @end

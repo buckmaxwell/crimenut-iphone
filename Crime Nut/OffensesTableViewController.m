@@ -8,6 +8,7 @@
 
 #import "OffensesTableViewController.h"
 #import "OffensesTableViewCell.h"
+#import "BasicModel.h"
 
 @interface OffensesTableViewController ()
 
@@ -39,8 +40,30 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	OffensesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"OffensesTableViewCell" forIndexPath:indexPath];
 	cell.offenseLabel.text = [self.offenses objectAtIndex:indexPath.row];
-    
+	cell.subjectCode = [self.subjectCodes objectAtIndex:indexPath.row];
+	[[BasicModel new] fixSeparators:cell];
+	self.tableView.layer.shouldRasterize = YES;
+	self.tableView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+
 	return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	OffensesTableViewCell *cell = (OffensesTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+	NSString *thingClicked = cell.offenseLabel.text;
+	NSString *code = cell.subjectCode;
+	[self passDataBackToParentView:thingClicked withSubjectCode:code];
+
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+
+-(void)passDataBackToParentView: (NSString *)thingClicked withSubjectCode:(NSString *)code
+{
+	[self.delegate pickedOffense:thingClicked withSubjectCode:code];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

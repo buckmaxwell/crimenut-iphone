@@ -23,10 +23,13 @@
 		9F901BA41AB50F3A0083DABC /* Signup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F901BA31AB50F3A0083DABC /* Signup.m */; };
 		9FA586201ABFBDB500333713 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA5861F1ABFBDB500333713 /* TPKeyboardAvoidingScrollView.m */; };
 		9FA586231ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FA586221ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
-		9FB0278E1AD05AE200629E20 /* CrimeNutLogo_034.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9FB0278D1AD05AE200629E20 /* CrimeNutLogo_034.gif */; };
 		9FD3A01E1B69CA3B00C7D271 /* OffensesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3A01D1B69CA3B00C7D271 /* OffensesTableViewController.m */; };
 		9FD3A0211B69CA7B00C7D271 /* OffensesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3A0201B69CA7B00C7D271 /* OffensesTableViewCell.m */; };
 		9FD3A0261B69CCD000C7D271 /* BasicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3A0251B69CCD000C7D271 /* BasicModel.m */; };
+		9FD3A02A1B69E1C600C7D271 /* PropertyDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3A0291B69E1C600C7D271 /* PropertyDescriptionViewController.m */; };
+		9FD3A02D1B69E8AC00C7D271 /* Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3A02C1B69E8AC00C7D271 /* Property.m */; };
+		9FD3A0301B69F36900C7D271 /* PerpatratorDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3A02F1B69F36900C7D271 /* PerpatratorDescriptionViewController.m */; };
+		9FD3A0331B69F4BC00C7D271 /* Perpatrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD3A0321B69F4BC00C7D271 /* Perpatrator.m */; };
 		9FE53BFD1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */; };
 		9FE53BFF1ABE273A0074F1D5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FE53BFE1ABE273A0074F1D5 /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -72,13 +75,20 @@
 		9FA5861F1ABFBDB500333713 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		9FA586211ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		9FA586221ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
-		9FB0278D1AD05AE200629E20 /* CrimeNutLogo_034.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = CrimeNutLogo_034.gif; path = "../../../Crimenut resources/CrimeNutLogo_034.gif"; sourceTree = "<group>"; };
 		9FD3A01C1B69CA3B00C7D271 /* OffensesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffensesTableViewController.h; sourceTree = "<group>"; };
 		9FD3A01D1B69CA3B00C7D271 /* OffensesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OffensesTableViewController.m; sourceTree = "<group>"; };
 		9FD3A01F1B69CA7B00C7D271 /* OffensesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OffensesTableViewCell.h; sourceTree = "<group>"; };
 		9FD3A0201B69CA7B00C7D271 /* OffensesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OffensesTableViewCell.m; sourceTree = "<group>"; };
 		9FD3A0241B69CCD000C7D271 /* BasicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicModel.h; sourceTree = "<group>"; };
 		9FD3A0251B69CCD000C7D271 /* BasicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicModel.m; sourceTree = "<group>"; };
+		9FD3A0281B69E1C600C7D271 /* PropertyDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyDescriptionViewController.h; sourceTree = "<group>"; };
+		9FD3A0291B69E1C600C7D271 /* PropertyDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyDescriptionViewController.m; sourceTree = "<group>"; };
+		9FD3A02B1B69E8AC00C7D271 /* Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Property.h; path = ../Property.h; sourceTree = "<group>"; };
+		9FD3A02C1B69E8AC00C7D271 /* Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Property.m; path = ../Property.m; sourceTree = "<group>"; };
+		9FD3A02E1B69F36900C7D271 /* PerpatratorDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerpatratorDescriptionViewController.h; sourceTree = "<group>"; };
+		9FD3A02F1B69F36900C7D271 /* PerpatratorDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerpatratorDescriptionViewController.m; sourceTree = "<group>"; };
+		9FD3A0311B69F4BC00C7D271 /* Perpatrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Perpatrator.h; sourceTree = "<group>"; };
+		9FD3A0321B69F4BC00C7D271 /* Perpatrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Perpatrator.m; sourceTree = "<group>"; };
 		9FE53BFB1ABDBF600074F1D5 /* NSDate+NVTimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NVTimeAgo.h"; sourceTree = "<group>"; };
 		9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NVTimeAgo.m"; sourceTree = "<group>"; };
 		9FE53BFE1ABE273A0074F1D5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -148,11 +158,14 @@
 				9F814E5E1ABB05B80050C511 /* MakeReport.m */,
 				9FD3A01C1B69CA3B00C7D271 /* OffensesTableViewController.h */,
 				9FD3A01D1B69CA3B00C7D271 /* OffensesTableViewController.m */,
+				9FD3A0281B69E1C600C7D271 /* PropertyDescriptionViewController.h */,
+				9FD3A0291B69E1C600C7D271 /* PropertyDescriptionViewController.m */,
+				9FD3A02E1B69F36900C7D271 /* PerpatratorDescriptionViewController.h */,
+				9FD3A02F1B69F36900C7D271 /* PerpatratorDescriptionViewController.m */,
 				9F901BA21AB50F3A0083DABC /* Signup.h */,
 				9F901BA31AB50F3A0083DABC /* Signup.m */,
 				9F569B011AB66417000DDA34 /* Login.h */,
 				9F569B021AB66417000DDA34 /* Login.m */,
-				9FB0278D1AD05AE200629E20 /* CrimeNutLogo_034.gif */,
 				9F901B7C1AB50D4A0083DABC /* Supporting Files */,
 			);
 			path = "Crime Nut";
@@ -210,6 +223,10 @@
 			children = (
 				9FD3A0241B69CCD000C7D271 /* BasicModel.h */,
 				9FD3A0251B69CCD000C7D271 /* BasicModel.m */,
+				9FD3A02B1B69E8AC00C7D271 /* Property.h */,
+				9FD3A02C1B69E8AC00C7D271 /* Property.m */,
+				9FD3A0311B69F4BC00C7D271 /* Perpatrator.h */,
+				9FD3A0321B69F4BC00C7D271 /* Perpatrator.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -297,7 +314,6 @@
 			files = (
 				9F901B881AB50D4A0083DABC /* Main.storyboard in Resources */,
 				9F901B8D1AB50D4A0083DABC /* LaunchScreen.xib in Resources */,
-				9FB0278E1AD05AE200629E20 /* CrimeNutLogo_034.gif in Resources */,
 				9F901B8A1AB50D4A0083DABC /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,11 +333,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FD3A01E1B69CA3B00C7D271 /* OffensesTableViewController.m in Sources */,
+				9FD3A02D1B69E8AC00C7D271 /* Property.m in Sources */,
 				9F814E671ABBE52C0050C511 /* FeedCell.m in Sources */,
+				9FD3A0331B69F4BC00C7D271 /* Perpatrator.m in Sources */,
 				9F569B031AB66417000DDA34 /* Login.m in Sources */,
 				9F814E6D1ABBEEB10050C511 /* ViewReport.m in Sources */,
 				9FA586231ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				9F814E5F1ABB05B80050C511 /* MakeReport.m in Sources */,
+				9FD3A02A1B69E1C600C7D271 /* PropertyDescriptionViewController.m in Sources */,
+				9FD3A0301B69F36900C7D271 /* PerpatratorDescriptionViewController.m in Sources */,
 				9F814E641ABBDDAE0050C511 /* CrimeFeed.m in Sources */,
 				9FD3A0211B69CA7B00C7D271 /* OffensesTableViewCell.m in Sources */,
 				9F814E5C1ABAFC6B0050C511 /* CallAuthorities.m in Sources */,

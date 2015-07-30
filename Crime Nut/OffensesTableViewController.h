@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class OffensesTableViewController;
+
+@protocol OffensesTableViewController <NSObject>
+- (void)pickedOffense:(NSString *)offense withSubjectCode:(NSString *)code;
+@end
+
 @interface OffensesTableViewController : UITableViewController
 
 @property NSArray *offenses;
 @property NSArray *subjectCodes;
+@property (nonatomic, weak) id <OffensesTableViewController> delegate;
+
 @end
