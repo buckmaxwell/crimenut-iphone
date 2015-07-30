@@ -8,11 +8,13 @@
 
 #import "MakeReport.h"
 #import "CrimeFeed.h"
+#import "BasicModel.h"
+#import "OffensesTableViewController.h"
 
-@interface MakeReport () <CLLocationManagerDelegate>{
-    NSArray *pickerData;
-    NSArray *subjectCodes;
-}@end
+@interface MakeReport () <CLLocationManagerDelegate>
+@property NSArray *pickerData;
+@property NSArray *subjectCodes;
+@end
 
 @implementation MakeReport
 
@@ -25,24 +27,31 @@
 CLLocationManager *locationManager;
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
-    if ([CLLocationManager locationServicesEnabled]) {
-        locationManager = [[CLLocationManager alloc] init];
-        locationManager.delegate = self;
-        if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-            [locationManager requestWhenInUseAuthorization];
-        }
-        locationManager.distanceFilter = kCLDistanceFilterNone;
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        [locationManager startUpdatingLocation];
-    }else{
-        NSLog(@"well no fuckin wonder\n");
-    }
-    pickerData = @[@"Theft", @"Property Damage", @"Burglary",@"Assault",@"Menacing", @"Vandalism",@"Robbery",@"Other"];
-    subjectCodes = @[@"115",          @"551",                   @"6969",          @"254",           @"255",       @"554",        @"450",        @"0000"];
-
+	[super viewDidLoad];
+	// Do any additional setup after loading the view.
+	self.navigationController.navigationBar.translucent = NO;
+	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+	[self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+	self.navigationItem.title = @"Report an Incident";
+	UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pickOffense)];
+	self.subjectLabel.text = @"Choose Offense ->";
+	[self.subjectLabel setUserInteractionEnabled:YES];
+	[self.subjectLabel addGestureRecognizer:singleTap];
+	if ([CLLocationManager locationServicesEnabled]) {
+		locationManager = [[CLLocationManager alloc] init];
+		locationManager.delegate = self;
+		if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+			[locationManager requestWhenInUseAuthorization];
+		}
+		locationManager.distanceFilter = kCLDistanceFilterNone;
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+		[locationManager startUpdatingLocation];
+	}else{
+		NSLog(@"well no fuckin wonder\n");
+	}
+	self.pickerData = @[@"Theft", @"Property Damage", @"Burglary",@"Assault",@"Menacing", @"Vandalism",@"Robbery",@"Other"];
+	self.subjectCodes = @[@"115",          @"551",                   @"6969",          @"254",           @"255",       @"554",        @"450",        @"0000"];
+	
 	[self updateDateLabel];
 }
 
@@ -61,6 +70,14 @@ CLLocationManager *locationManager;
 }
 
 
+-(void)pickOffense{
+	OffensesTableViewController *otvc = [self.storyboard instantiateViewControllerWithIdentifier:@"OffensesTableViewController"];
+	otvc.offenses = self.pickerData;
+	otvc.subjectCodes = self.subjectCodes;
+	[self.navigationController pushViewController:otvc animated:YES];
+}
+
+
 // The number of columns of data
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -70,7 +87,7 @@ CLLocationManager *locationManager;
 // The number of rows of data
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return pickerData.count;
+    return self.pickerData.count;
 }
 
 
@@ -85,7 +102,7 @@ CLLocationManager *locationManager;
 	
 	
     if( [what isEqualToString:@""] || [desc isEqualToString:@""] || [where isEqualToString:@""] ){
-        [self showAlert:@"Hmmmm..." withMessage:@"Some report information is mising"];
+        [[BasicModel new] showAlert:@"Hmmmm..." withMessage:@"Some report information is mising"];
         return;
     }
     //get token
@@ -156,7 +173,7 @@ CLLocationManager *locationManager;
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            //alert user somehow of error?
                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                              [self showAlert:@"We encountered a problem" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
+                                              [[BasicModel new] showAlert:@"We encountered a problem" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
                                           });
                                        }else{
                                            //get and store token
@@ -177,7 +194,7 @@ CLLocationManager *locationManager;
                                                }else{
                                                    //handle storing issues
                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                       [self showAlert:@"Something went amiss" withMessage:@"For some reason we couldnt process your report.\nSorry about that."];
+                                                       [[BasicModel new] showAlert:@"Something went amiss" withMessage:@"For some reason we couldnt process your report.\nSorry about that."];
                                                    });
                                                }
                                            });
@@ -185,14 +202,14 @@ CLLocationManager *locationManager;
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                           [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                           [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
                                        });
 
                                    }
                                } else {
                                    NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                       [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                       [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
                                    });
 
                                }
@@ -200,22 +217,12 @@ CLLocationManager *locationManager;
 
 }
 
+
+
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [locationManager stopUpdatingLocation];
-}
-
-
-
-
-
--(void)showAlert:(NSString *)title withMessage:(NSString *)message{
-    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:title
-                                                       message:message
-                                                      delegate:self
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-    [theAlert show];
 }
 
 
@@ -228,15 +235,17 @@ CLLocationManager *locationManager;
 	[dateButton setTitle:date forState:UIControlStateNormal];
 }
 
+
 - (void)removeViews:(id)object {
 	[[self.view viewWithTag:9] removeFromSuperview];
 	[[self.view viewWithTag:10] removeFromSuperview];
 	[[self.view viewWithTag:11] removeFromSuperview];
 }
 
+
 - (void)dismissDatePicker:(id)sender {
-	CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height, 320, 44);
-	CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height+44, 320, 216);
+	CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 44);
+	CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height+44,  self.view.bounds.size.width, 216);
 	[UIView beginAnimations:@"MoveOut" context:nil];
 	[self.view viewWithTag:9].alpha = 0;
 	[self.view viewWithTag:10].frame = datePickerTargetFrame;
@@ -250,8 +259,8 @@ CLLocationManager *locationManager;
 	if ([self.view viewWithTag:9]) {
 		return;
 	}
-	CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height-216-44, 320, 44);
-	CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height-216, 320, 216);
+	CGRect toolbarTargetFrame = CGRectMake(0, self.view.bounds.size.height-216-44, self.view.bounds.size.width, 44);
+	CGRect datePickerTargetFrame = CGRectMake(0, self.view.bounds.size.height-216, self.view.bounds.size.width, 216);
 	
 	UIView *darkView = [[UIView alloc] initWithFrame:self.view.bounds];
 	darkView.alpha = 0;
@@ -261,13 +270,13 @@ CLLocationManager *locationManager;
 	[darkView addGestureRecognizer:tapGesture];
 	[self.view addSubview:darkView];
 	
-	UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height+44, 320, 216)];
+	UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height+44, self.view.bounds.size.width, 216)];
 	datePicker.tag = 10;
 	datePicker.backgroundColor = [UIColor whiteColor];
 	[datePicker addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventValueChanged];
 	[self.view addSubview:datePicker];
 	
-	UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 320, 44)];
+	UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.bounds.size.width, 44)];
 	toolBar.tag = 11;
 	toolBar.barStyle = UIBarStyleDefault;
 	UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];

@@ -892,7 +892,7 @@
             </objects>
             <point key="canvasLocation" x="3678" y="39"/>
         </scene>
-        <!--Report an Incident-->
+        <!--Make Report-->
         <scene sceneID="fkM-N8-hbt">
             <objects>
                 <viewController storyboardIdentifier="MakeReport" id="S7z-Ne-MRQ" customClass="MakeReport" sceneMemberID="viewController">
@@ -1281,7 +1281,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Report an Incident" id="bb1-NT-d3o">
+                    <navigationItem key="navigationItem" id="bb1-NT-d3o">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="s7e-bF-3dR">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -1299,6 +1299,86 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MGT-Bg-Hed" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4060.5" y="705"/>
+        </scene>
+        <!--Offenses Table View Controller-->
+        <scene sceneID="R5h-g5-OeN">
+            <objects>
+                <tableViewController storyboardIdentifier="OffensesTableViewController" id="bIx-jf-AIu" customClass="OffensesTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="67" sectionHeaderHeight="22" sectionFooterHeight="22" id="EOK-1b-yDs">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OffensesTableViewCell" rowHeight="67" id="oIq-MN-V73" customClass="OffensesTableViewCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oIq-MN-V73" id="w2X-ec-XQX">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGj-qB-iss">
+                                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="47" id="yOb-JZ-d2H"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="yOb-JZ-d2H"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="8" y="8" width="384" height="47"/>
+                                                <mask key="constraints">
+                                                    <include reference="yOb-JZ-d2H"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="TGj-qB-iss" secondAttribute="trailing" constant="8" id="b8E-gc-02Q"/>
+                                        <constraint firstAttribute="bottom" secondItem="TGj-qB-iss" secondAttribute="bottom" constant="8" id="ggh-XL-QoR"/>
+                                        <constraint firstItem="TGj-qB-iss" firstAttribute="top" secondItem="w2X-ec-XQX" secondAttribute="top" constant="8" id="mFp-EN-8x4"/>
+                                        <constraint firstItem="TGj-qB-iss" firstAttribute="leading" secondItem="w2X-ec-XQX" secondAttribute="leading" constant="8" id="vxG-RG-gbT"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="TGj-qB-iss"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="b8E-gc-02Q"/>
+                                            <exclude reference="ggh-XL-QoR"/>
+                                            <exclude reference="mFp-EN-8x4"/>
+                                            <exclude reference="vxG-RG-gbT"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="TGj-qB-iss"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="b8E-gc-02Q"/>
+                                            <include reference="ggh-XL-QoR"/>
+                                            <include reference="mFp-EN-8x4"/>
+                                            <include reference="vxG-RG-gbT"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="offenseLabel" destination="TGj-qB-iss" id="T2W-vh-ndV"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bIx-jf-AIu" id="gX7-lu-SWn"/>
+                            <outlet property="delegate" destination="bIx-jf-AIu" id="Aac-bm-cF2"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KST-cs-tkC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4941" y="705"/>
         </scene>
         <!--Call Authorities-->
         <scene sceneID="3ys-RV-lVc">

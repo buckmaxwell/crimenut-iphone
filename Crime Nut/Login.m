@@ -9,6 +9,7 @@
 #import "Login.h"
 #import "Signup.h"
 #import "CrimeFeed.h"
+#import "BasicModel.h"
 
 
 @interface Login ()
@@ -43,7 +44,7 @@
     NSString *uname = usernameText.text;
     NSString *pword = passwordText.text;
     if( [uname isEqualToString:@""] || [pword isEqualToString:@""] ){
-        [self showAlert:@"Something went wrong" withMessage:@"Username and password are required"];
+        [[BasicModel new] showAlert:@"Something went wrong" withMessage:@"Username and password are required"];
         return;
     }
 
@@ -91,7 +92,7 @@
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self showAlert:@"We encountered a problem" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
+                                               [[BasicModel new] showAlert:@"We encountered a problem" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
                                            });
                                        }else{
                                            //get and store token
@@ -117,7 +118,7 @@
                                                }else{
                                                    // handle storing issues
                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                       [self showAlert:@"We encountered a problem" withMessage:@"For some reason we could not save your information on this phone"];
+                                                       [[BasicModel new] showAlert:@"We encountered a problem" withMessage:@"For some reason we could not save your information on this phone"];
                                                    });
                                                }
                                            });
@@ -125,26 +126,17 @@
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                           [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                           [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
                                        });
                                    }
                                } else {
                                    NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                       [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                       [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
                                    });
                                }
                            }];
 
-}
-
--(void)showAlert:(NSString *)title withMessage:(NSString *)message{
-    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:title
-                                                       message:message
-                                                      delegate:self
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-    [theAlert show];
 }
 
 - (IBAction)needToSignupTapped:(id)sender{

@@ -7,6 +7,7 @@
 //
 
 #import "ViewReport.h"
+#import "BasicModel.h"
 
 #define METERS_MILE 1609.344
 #define METERS_FEET 3.28084
@@ -95,7 +96,7 @@
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self showAlert:@"Something went amiss" withMessage:[apiresponse objectAtIndex:0]];
+                                               [[BasicModel new] showAlert:@"Something went amiss" withMessage:[apiresponse objectAtIndex:0]];
                                            });
                                            
                                        }else{
@@ -127,13 +128,13 @@
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                           [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                           [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
                                        });
                                    }
                                } else {
                                    NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                       [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                       [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
                                    });
                                }
                            }];
@@ -246,24 +247,24 @@
                                            if (apiresponse) {
                                                NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                   [self showAlert:@"Something went amiss" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
+                                                   [[BasicModel new] showAlert:@"Something went amiss" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
                                                });
                                                
                                            }else{
                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                    [self showAlert:@"Thanks!" withMessage:@"This post now has a lower priority than others."];
+                                                    [[BasicModel new] showAlert:@"Thanks!" withMessage:@"This post now has a lower priority than others."];
                                                });
                                            }
                                        }else{
                                            NSLog(@"STATUS: %ld\n",(long)statusCode);
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                               [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
                                            });
                                        }
                                    } else {
                                        NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                           [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                           [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
                                        });
                                    }
                                }];
@@ -271,15 +272,6 @@
 }
 
 
-
--(void)showAlert:(NSString *)title withMessage:(NSString *)message{
-    UIAlertView *theAlert = [[UIAlertView alloc] initWithTitle:title
-                                                       message:message
-                                                      delegate:self
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles:nil];
-    [theAlert show];
-}
 
 
 - (IBAction)postCommentTapped:(id)sender {
@@ -325,12 +317,12 @@
                                        if (apiresponse) {
                                            NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self showAlert:@"Something went amiss" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
+                                               [[BasicModel new] showAlert:@"Something went amiss" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
                                            });
                                            
                                        }else{
                                            dispatch_async(dispatch_get_main_queue(), ^{
-                                               [self showAlert:@"We've posted your comment" withMessage:@"Thanks for being a Crimenut!"];
+                                               [[BasicModel new] showAlert:@"We've posted your comment" withMessage:@"Thanks for being a Crimenut!"];
 											   
 											   self.commentsLabel.text = [NSString stringWithFormat:@"%@\n%@\n ",self.commentsLabel.text,comment];
 											   [commentsLabel setPreferredMaxLayoutWidth:360];
@@ -346,13 +338,13 @@
                                    }else{
                                        NSLog(@"STATUS: %ld\n",(long)statusCode);
                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                           [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+                                           [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
                                        });
                                    }
                                } else {
                                    NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                       [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+                                       [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
                                    });
                                }
                            }];
