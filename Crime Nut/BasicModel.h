@@ -11,6 +11,9 @@
 
 @interface BasicModel : NSObject
 
+-(void)callAPI:(NSURL *)url withJSONData:(NSData *)JSONData withCompletionBlock:(void (^)(NSDictionary *data))executeBlock
+		andErrorResponseBlock:(void (^)(NSMutableArray *apiResponse))errorBlock;
+
 -(void)fixSeparators:(UITableViewCell *)cell;
 
 -(void)showAlert:(NSString *)title withMessage:(NSString *)message;

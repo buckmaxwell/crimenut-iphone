@@ -142,12 +142,6 @@
 				9FD3A0271B69CCDB00C7D271 /* Model */,
 				9FD3A0221B69CA8B00C7D271 /* Table Cells */,
 				9FD3A0231B69CAAD00C7D271 /* View */,
-				9FA586211ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
-				9FA586221ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
-				9FA5861E1ABFBDB500333713 /* TPKeyboardAvoidingScrollView.h */,
-				9FA5861F1ABFBDB500333713 /* TPKeyboardAvoidingScrollView.m */,
-				9FE53BFB1ABDBF600074F1D5 /* NSDate+NVTimeAgo.h */,
-				9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */,
 				9F814E6B1ABBEEB10050C511 /* ViewReport.h */,
 				9F814E6C1ABBEEB10050C511 /* ViewReport.m */,
 				9F814E621ABBDDAE0050C511 /* CrimeFeed.h */,
@@ -227,6 +221,12 @@
 				9FD3A02C1B69E8AC00C7D271 /* Property.m */,
 				9FD3A0311B69F4BC00C7D271 /* Perpatrator.h */,
 				9FD3A0321B69F4BC00C7D271 /* Perpatrator.m */,
+				9FA586211ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				9FA586221ABFBEE000333713 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				9FA5861E1ABFBDB500333713 /* TPKeyboardAvoidingScrollView.h */,
+				9FA5861F1ABFBDB500333713 /* TPKeyboardAvoidingScrollView.m */,
+				9FE53BFB1ABDBF600074F1D5 /* NSDate+NVTimeAgo.h */,
+				9FE53BFC1ABDBF600074F1D5 /* NSDate+NVTimeAgo.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -476,11 +476,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Allen White (XWQ3X4T33E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Crime Nut/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ab2a267a-5760-4865-a4a9-a3879d006a2c";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -488,11 +490,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Allen White (XWQ3X4T33E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Crime Nut/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ab2a267a-5760-4865-a4a9-a3879d006a2c";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -571,11 +575,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Allen White (XWQ3X4T33E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Crime Nut/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ab2a267a-5760-4865-a4a9-a3879d006a2c";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Distribution;
 		};

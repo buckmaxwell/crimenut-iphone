@@ -20,6 +20,7 @@
 	// Override point for customization after application launch.
 	[[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x666666)];
 	[[UINavigationBar appearance] setTintColor:UIColor.whiteColor];
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
 	// Register for Remote Notifications
 	if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -65,11 +66,12 @@
 	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
 	
 	if (apsInfo) { //apsInfo is not nil
-		
 		NSMutableString *notificationType = [apsInfo objectForKey:@"alert"];
 		
 		NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
 		NSString *apnstoken = [defaults stringForKey:@"APNSRegID"];
+		
+		//show crime
 		
 	}
 }

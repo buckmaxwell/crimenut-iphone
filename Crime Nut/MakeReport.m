@@ -141,127 +141,62 @@ CLLocationManager *locationManager;
 
 
 - (IBAction)postButtonTapped:(id)sender {
-    
-    NSString *where = whereTextField.text;
-    NSString *time = dateButton.titleLabel.text;
+	NSString *where = whereTextField.text;
+	NSString *time = dateButton.titleLabel.text;
 	NSString *what = subjectLabel.text;
-    NSString *desc = descriptionTextField.text;
+	NSString *desc = descriptionTextField.text;
 	
 	
-    if( [what isEqualToString:@""] || [desc isEqualToString:@""] || [where isEqualToString:@""] ){
-        [[BasicModel new] showAlert:@"Hmmmm..." withMessage:@"Some report information is mising"];
-        return;
-    }
-    //get token
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *tokenfromstorage = [defaults stringForKey:@"token"];
-
-    //get lat and long
-    NSNumber *latitude = [NSNumber numberWithFloat:locationManager.location.coordinate.latitude];
-    NSNumber *longitude = [NSNumber numberWithFloat:locationManager.location.coordinate.longitude];
-    
-    // URL of the endpoint we're going to contact.
-    NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/new"];    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    NSArray *empty = @[];
+	if( [what isEqualToString:@""] || [desc isEqualToString:@""] || [where isEqualToString:@""] ){
+		[[BasicModel new] showAlert:@"Hmmmm..." withMessage:@"Some report information is mising"];
+		return;
+	}
 	
-	
-    // Create a simple dictionary with shit to create a report.
-    NSDictionary *dictionary = @{
-                                 @"token":tokenfromstorage,
-                                 @"subjectcode":what,
-                                 @"address_line1":where,
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *tokenfromstorage = [defaults stringForKey:@"token"];
+	NSNumber *latitude = [NSNumber numberWithFloat:locationManager.location.coordinate.latitude];
+	NSNumber *longitude = [NSNumber numberWithFloat:locationManager.location.coordinate.longitude];
+	NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/new"];
+	NSArray *empty = @[];
+	NSDictionary *dictionary = @{
+				     @"token":tokenfromstorage,
+				     @"subjectcode":what,
+				     @"address_line1":where,
 								 @"time_began": time,
 								 @"time_ended":time,
-                                 @"lat_reported_from":latitude.stringValue,
-                                 @"lon_reported_from":longitude.stringValue,
-                                 @"description":desc,
-                                 @"offenses":empty,
-                                 @"perpetrators":empty,
-                                 @"property":empty
-							};
+				     @"lat_reported_from":latitude.stringValue,
+				     @"lon_reported_from":longitude.stringValue,
+				     @"description":desc,
+				     @"offenses":empty,
+				     @"perpetrators":empty,
+				     @"property":empty
+				     };
 
-    // Convert the dictionary into JSON data.
-    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
-                                                       options:0
-                                                         error:nil];
-    //    NSString *strData = [[NSString alloc]initWithData:JSONData encoding:NSUTF8StringEncoding];
-    //    NSLog(@"1:::%@\n", strData);
-    //    NSLog(@"2:::%@", JSONData);
-    // Create a POST request with our JSON as a request body.
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:JSONData];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    //use this to grab the ol response
-    __block NSMutableArray *apiresponse = [NSMutableArray array];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
-    [locationManager stopUpdatingLocation];
-    
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:queue
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               
-                               NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-                               NSInteger statusCode = [httpResponse statusCode];
-                               if (!connectionError) {
-                                   if (statusCode != 500) {
-                                       NSError *error = nil;
-                                       NSDictionary *responseDictionary = [NSJSONSerialization
-                                                                           JSONObjectWithData:data
-                                                                           options:0
-                                                                           error:&error];
-                                       NSLog(@"err?::: %@\n",error);
-                                      // NSLog(@"response::: %@\n",response);
-                                       apiresponse = [responseDictionary objectForKey:@"ERROR"];
-                                       if (apiresponse) {
-                                           NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
-                                           //alert user somehow of error?
-                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                              [[BasicModel new] showAlert:@"We encountered a problem" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
-                                          });
-                                       }else{
-                                           //get and store token
-                                           NSString *idfromJson = [responseDictionary objectForKey:@"id"];
-                                           NSLog(@"ID: %@",idfromJson);
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               if(idfromJson){
-                                                   //send em to the main screen
-                                                   CrimeFeed *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"CrimeFeed"];
-                                                   UINavigationController *navigationController =
-                                                   [[UINavigationController alloc] initWithRootViewController:controller];
-                                                   
-                                                   //now present this navigation controller modally
-                                                   [self presentViewController:navigationController
-                                                                      animated:YES
-                                                                    completion:^{
-                                                                    }];
-                                               }else{
-                                                   //handle storing issues
-                                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                                       [[BasicModel new] showAlert:@"Something went amiss" withMessage:@"For some reason we couldnt process your report.\nSorry about that."];
-                                                   });
-                                               }
-                                           });
-                                       }
-                                   }else{
-                                       NSLog(@"STATUS: %ld\n",(long)statusCode);
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
-                                       });
-
-                                   }
-                               } else {
-                                   NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
-                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                       [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
-                                   });
-
-                               }
-                           }];
-
+	NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
+	BasicModel *model = [BasicModel new];
+	[model callAPI:url withJSONData:JSONData withCompletionBlock:^(NSDictionary *data) {
+		if (data) {
+			//get and store token
+			NSString *idfromJson = [data objectForKey:@"id"];
+			NSLog(@"ID: %@",idfromJson);
+			if(idfromJson){
+				//send em to the main screen
+				CrimeFeed *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"CrimeFeed"];
+				UINavigationController *navigationController =
+				[[UINavigationController alloc] initWithRootViewController:controller];
+				
+				//now present this navigation controller modally
+				[self presentViewController:navigationController
+							animated:YES
+							completion:^{
+							}];
+			}else{
+				[[BasicModel new] showAlert:@"Something went amiss" withMessage:@"For some reason we couldnt process your report.\nSorry about that."];
+			}
+		}
+	} andErrorResponseBlock:^(NSMutableArray *apiresponse){
+		[model showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
+	}];
 }
 
 

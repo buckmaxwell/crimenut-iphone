@@ -52,93 +52,40 @@
 
 //get lat, lon, desc, comments
 -(void)viewWillAppear:(BOOL)animated{
-//    NSLog(@"id%@",reportId);
+	//load the report
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *tokenfromstorage = [defaults stringForKey:@"token"];
 	
-    //get token
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *tokenfromstorage = [defaults stringForKey:@"token"];
-    
-    // URL of the endpoint we're going to contact.
-    NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/report"];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    // Create a simple dictionary with numbers.
-    NSDictionary *dictionary = @{@"reportid":self.reportId, @"token":tokenfromstorage};
-    
-    // Convert the dictionary into JSON data.
-    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
-                                                       options:0
-                                                         error:nil];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:JSONData];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    //use this to grab the ol response
-    __block NSMutableArray *apiresponse = [NSMutableArray array];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:queue
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               
-                               NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-                               NSInteger statusCode = [httpResponse statusCode];
-                               if (!connectionError) {
-                                   if (statusCode != 500) {
-                                       NSError *error = nil;
-                                       NSDictionary *responseDictionary = [NSJSONSerialization
-                                                                           JSONObjectWithData:data
-                                                                           options:0
-                                                                           error:&error];
-                                       apiresponse = [responseDictionary objectForKey:@"ERROR"];
-                                       if (apiresponse) {
-                                           NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               [[BasicModel new] showAlert:@"Something went amiss" withMessage:[apiresponse objectAtIndex:0]];
-                                           });
-                                           
-                                       }else{
-                                           //shit worked
-                                           NSString *desc = [responseDictionary objectForKey:@"description"];
-                                           NSString *lon = [responseDictionary objectForKey:@"lon"];
-                                           NSString *lat = [responseDictionary objectForKey:@"lat"];
-                                           CLLocation *loc = [[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]];
-                                           //NSLog(@"lat:%@,lon:%@",lat,lon);
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-											   [self showDescription:desc];
-                                               NSMutableArray * annotationsToRemove = [ self.mapView.annotations mutableCopy ] ;
-                                               [ annotationsToRemove removeObject:self.mapView.userLocation ] ;
-                                               [ self.mapView removeAnnotations:annotationsToRemove ] ;
-                                               // zoom the map into the users current location
-                                               MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(loc.coordinate, METERS_MILE, METERS_MILE);
-                                               [[self mapView] setRegion:viewRegion animated:YES];
-
-                                               MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-                                               [annotation setCoordinate:loc.coordinate];
-                                               [self.mapView addAnnotation:annotation];
-                                               
-                                               self.reportComments =  [responseDictionary objectForKey:@"comments"];
-                                               [self getComments];
-                                               
-                                           });
-                                           
-                                       }
-                                   }else{
-                                       NSLog(@"STATUS: %ld\n",(long)statusCode);
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
-                                       });
-                                   }
-                               } else {
-                                   NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
-                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                       [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
-                                   });
-                               }
-                           }];
-	
+	NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/report"];
+	NSDictionary *dictionary = @{@"reportid":self.reportId, @"token":tokenfromstorage};
+	NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
+	BasicModel *model = [BasicModel new];
+	[model callAPI:url withJSONData:JSONData withCompletionBlock:^(NSDictionary *data) {
+		if (data) {
+			//shit worked
+			NSString *desc = [data objectForKey:@"description"];
+			NSString *lon = [data objectForKey:@"lon"];
+			NSString *lat = [data objectForKey:@"lat"];
+			CLLocation *loc = [[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]];
+			
+			[self showDescription:desc];
+			NSMutableArray * annotationsToRemove = [ self.mapView.annotations mutableCopy ] ;
+			[ annotationsToRemove removeObject:self.mapView.userLocation ] ;
+			[ self.mapView removeAnnotations:annotationsToRemove ] ;
+			// zoom the map into the users current location
+			MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(loc.coordinate, METERS_MILE, METERS_MILE);
+			[[self mapView] setRegion:viewRegion animated:YES];
+				
+			MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+			[annotation setCoordinate:loc.coordinate];
+			[self.mapView addAnnotation:annotation];
+				
+			self.reportComments =  [data objectForKey:@"comments"];
+			[self getComments];
+		}
+	} andErrorResponseBlock:^(NSMutableArray *apiresponse){
+		[model showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
+	}];
 }
 
 
@@ -199,155 +146,53 @@
 //process the spam notification
 - (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == 0 && [@"This is spam" isEqualToString:[theAlert buttonTitleAtIndex:buttonIndex]]){
-        //send the ol request for spam
-        
-        //get token
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *tokenfromstorage = [defaults stringForKey:@"token"];
-        
-        // URL of the endpoint we're going to contact.
-        NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/spam/new"];
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        
-        // Create a simple dictionary with numbers.
-        NSDictionary *dictionary = @{@"reportid":self.reportId, @"token":tokenfromstorage};
-        
-        // Convert the dictionary into JSON data.
-        NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
-                                                           options:0
-                                                             error:nil];
-        [request setHTTPMethod:@"POST"];
-        [request setHTTPBody:JSONData];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
-        //use this to grab the ol response
-        __block NSMutableArray *apiresponse = [NSMutableArray array];
-        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-        
-        [NSURLConnection sendAsynchronousRequest:request
-                                           queue:queue
-                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                                   
-                                   NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-                                   NSInteger statusCode = [httpResponse statusCode];
-                                   if (!connectionError) {
-                                       if (statusCode != 500) {
-                                           NSError *error = nil;
-                                           NSDictionary *responseDictionary = [NSJSONSerialization
-                                                                               JSONObjectWithData:data
-                                                                               options:0
-                                                                               error:&error];
-                                           //NSLog(@"err::: %@\n",error);
-                                           //NSLog(@"response::: %@\n",response);
-                                           NSLog(@"RespDict::: %@\n", responseDictionary);
-                                           apiresponse = [responseDictionary objectForKey:@"ERROR"];
-                                           if (apiresponse) {
-                                               NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
-                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                   [[BasicModel new] showAlert:@"Something went amiss" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
-                                               });
-                                               
-                                           }else{
-                                               dispatch_async(dispatch_get_main_queue(), ^{
-                                                    [[BasicModel new] showAlert:@"Thanks!" withMessage:@"This post now has a lower priority than others."];
-                                               });
-                                           }
-                                       }else{
-                                           NSLog(@"STATUS: %ld\n",(long)statusCode);
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
-                                           });
-                                       }
-                                   } else {
-                                       NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
-                                       });
-                                   }
-                               }];
-    }
+	if(buttonIndex == 0 && [@"This is spam" isEqualToString:[theAlert buttonTitleAtIndex:buttonIndex]]){
+		//send the ol request for spam
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		NSString *tokenfromstorage = [defaults stringForKey:@"token"];
+		
+		NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/spam/new"];
+		NSDictionary *dictionary = @{@"reportid":self.reportId, @"token":tokenfromstorage};
+		NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
+		BasicModel *model = [BasicModel new];
+		[model callAPI:url withJSONData:JSONData withCompletionBlock:^(NSDictionary *data) {
+			if (data) {
+				[[BasicModel new] showAlert:@"Thanks!" withMessage:@"This post now has a lower priority than others."];
+			}
+		} andErrorResponseBlock:^(NSMutableArray *apiresponse){
+			[model showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
+		}];
+	}
 }
 
 
 
 
 - (IBAction)postCommentTapped:(id)sender {
-    NSString *comment = self.commentTextField.text;
-    //get token
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *tokenfromstorage = [defaults stringForKey:@"token"];
-    
-    // URL of the endpoint we're going to contact.
-    NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/comments/new"];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    // Create a simple dictionary with numbers.
-    NSDictionary *dictionary = @{@"report_id":self.reportId, @"token":tokenfromstorage,@"content":comment};
-    // Convert the dictionary into JSON data.
-    NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary
-                                                       options:0
-                                                         error:nil];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:JSONData];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    //use this to grab the ol response
-    __block NSMutableArray *apiresponse = [NSMutableArray array];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:queue
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                               
-                               NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-                               NSInteger statusCode = [httpResponse statusCode];
-                               if (!connectionError) {
-                                   if (statusCode != 500) {
-                                       NSError *error = nil;
-                                       NSDictionary *responseDictionary = [NSJSONSerialization
-                                                                           JSONObjectWithData:data
-                                                                           options:0
-                                                                           error:&error];
-                                       apiresponse = [responseDictionary objectForKey:@"ERROR"];
-                                       if (apiresponse) {
-                                           NSLog(@"APIRESPONSEforerror:::%@", apiresponse);
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               [[BasicModel new] showAlert:@"Something went amiss" withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
-                                           });
-                                           
-                                       }else{
-                                           dispatch_async(dispatch_get_main_queue(), ^{
-                                               [[BasicModel new] showAlert:@"We've posted your comment" withMessage:@"Thanks for being a Crimenut!"];
-											   
-											   self.commentsLabel.text = [NSString stringWithFormat:@"%@\n%@\n ",self.commentsLabel.text,comment];
-											   [commentsLabel setPreferredMaxLayoutWidth:360];
-											   CGSize maxSize = CGSizeMake(360, 810);
-											   CGRect expectedLabelSize = [comment boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:commentsLabel.font} context:Nil];
-											   CGRect newFrame = commentsLabel.frame;
-											   newFrame.size.height = expectedLabelSize.size.height;
-											   commentsLabel.frame = newFrame;
-											   self.commentTextField.text = @"";
-
-                                           });
-                                       }
-                                   }else{
-                                       NSLog(@"STATUS: %ld\n",(long)statusCode);
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
-                                       });
-                                   }
-                               } else {
-                                   NSLog(@"Error!!!! ,%@", [connectionError localizedDescription]);
-                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                       [[BasicModel new] showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
-                                   });
-                               }
-                           }];
+	//get token
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *tokenfromstorage = [defaults stringForKey:@"token"];
+	
+	NSURL *url = [NSURL URLWithString:@"http://crimenut.maxwellbuck.com/reports/comments/new"];
+	NSDictionary *dictionary = @{@"report_id":self.reportId, @"token":tokenfromstorage,@"content":self.commentTextField.text};
+	NSData *JSONData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:nil];
+	BasicModel *model = [BasicModel new];
+	[model callAPI:url withJSONData:JSONData withCompletionBlock:^(NSDictionary *data) {
+		if (data) {
+			[[BasicModel new] showAlert:@"We've posted your comment" withMessage:@"Thanks for being a Crimenut!"];
+			
+			self.commentsLabel.text = [NSString stringWithFormat:@"%@\n%@\n ",self.commentsLabel.text, self.commentTextField.text];
+			[commentsLabel setPreferredMaxLayoutWidth:360];
+			CGSize maxSize = CGSizeMake(360, 810);
+			CGRect expectedLabelSize = [self.commentTextField.text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:commentsLabel.font} context:Nil];
+			CGRect newFrame = commentsLabel.frame;
+			newFrame.size.height = expectedLabelSize.size.height;
+			commentsLabel.frame = newFrame;
+			self.commentTextField.text = @"";
+		}
+	} andErrorResponseBlock:^(NSMutableArray *apiresponse){
+		[model showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"%@",apiresponse]];
+	}];
 }
 
 - (void)applicationEnteredForeground:(NSNotification *)notification {

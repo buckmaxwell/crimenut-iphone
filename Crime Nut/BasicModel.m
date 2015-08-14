@@ -11,6 +11,57 @@
 @implementation BasicModel
 
 
+-(void)callAPI:(NSURL *)url withJSONData:(NSData *)JSONData withCompletionBlock:(void (^)(NSDictionary *data))executeBlock
+														andErrorResponseBlock:(void (^)(NSMutableArray *apiResponse))errorBlock{
+	
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	
+	[request setHTTPMethod:@"POST"];
+	[request setHTTPBody:JSONData];
+	[request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+	[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+	
+	__block NSMutableArray *apiresponse = [NSMutableArray array];
+	NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+	
+	[NSURLConnection sendAsynchronousRequest:request
+					   queue:queue
+			       completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+				       
+				       NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+				       NSInteger statusCode = [httpResponse statusCode];
+				       if (!connectionError) {
+					       if (statusCode != 500) {
+						       NSError *error = nil;
+						       NSDictionary *responseDictionary = [NSJSONSerialization
+											   JSONObjectWithData:data
+											   options:0
+											   error:&error];
+						       apiresponse = [responseDictionary objectForKey:@"ERROR"];
+						       if (apiresponse) {
+							       dispatch_async(dispatch_get_main_queue(), ^{
+								       errorBlock(apiresponse);
+							       });
+						       }else{
+							       dispatch_async(dispatch_get_main_queue(), ^{
+								       executeBlock(responseDictionary);
+							       });
+						       }
+					       }else{
+						       dispatch_async(dispatch_get_main_queue(), ^{
+							       [self showAlert:@"There seems to be a problem..." withMessage:[NSString stringWithFormat:@"Bad connection: %ld",(long)statusCode]];
+						       });
+					       }
+				       } else {
+					       dispatch_async(dispatch_get_main_queue(), ^{
+						       [self showAlert:@"There seems to be a problem..." withMessage:[connectionError localizedDescription]];
+					       });
+				       }
+			       }];
+}
+
+
+
 -(void)fixSeparators:(UITableViewCell *)cell{
 	// Remove seperator inset
 	if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {

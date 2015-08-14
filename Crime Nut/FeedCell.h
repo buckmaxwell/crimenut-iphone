@@ -10,10 +10,9 @@
 
 @interface FeedCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *subtitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *descLabel;
-@property (strong, nonatomic) IBOutlet UILabel *timeLabel;
-
+@property (strong, nonatomic) IBOutlet UILabel *crimeTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *crimeSubtitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *crimeDescLabel;
+@property (strong, nonatomic) IBOutlet UILabel *crimeTimeLabel;
 
 @end
